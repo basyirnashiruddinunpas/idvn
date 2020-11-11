@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default">
+    <head>
+        <title>Create base</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="row">
+            <div class="col-xs-8 col-md-8">
+                <h3>
+                    <a href="/base" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-list"></span> base</a>
+                </h3>
+                <h2>Create base</h2>
+                <form action="/save" method="post">
+                    <div class="form-group">
+                        <label for="email">base Name:</label>
+                        <input type="text" class="form-control" name="name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">base Description</label>
+                        <textarea class="form-control" name="desc" cols="60" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">base Price</label>
+                        <input type="number" class="form-control" name="price" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">base Image URL:</label>
+                        <input type="url" class="form-control" name="img" />
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

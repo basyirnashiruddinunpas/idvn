@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>base List</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="row">
+            <div class="col-xs-8 col-md-8">
+                <h3>
+                    <a href="/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> base</a>
+                </h3>
+                <h2>base List</h2>
+                <div class="table-responsive">
+                    <table class="table" id="base-table">
+                        <thead>
+                            <tr>
+                                <th>base Name</th>
+                                <th>base Desc</th>
+                                <th>base Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="base : ${bases}">
+                                <td><a th:text="${base.name}" th:href="@{'/show/' + ${base.id}}"></a></td>
+                                <td th:text="${base.desc}"></td>
+                                <td th:text="${base.price}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
