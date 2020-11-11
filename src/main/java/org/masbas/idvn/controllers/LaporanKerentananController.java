@@ -7,17 +7,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class WebController {
+public class LaporanKerentananController {
 	private String appMode;
 	
 	@Autowired
-	public WebController(Environment environment) {
+	public LaporanKerentananController(Environment environment) {
 		appMode = environment.getProperty("app-mode");
 	}
 	
-	@RequestMapping("/")
+	@RequestMapping("/home")
 	public String index(Model model) {
-		return "redirect:home";
+		model.addAttribute("username", "Coba");
+		model.addAttribute("mode", appMode);
+		return "index";
 	}
-
+	
 }
