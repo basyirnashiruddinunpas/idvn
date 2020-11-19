@@ -1,57 +1,58 @@
 package org.masbas.idvn.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.security.Timestamp;
 
-@Document(collection = "try")
+import org.springframework.data.annotation.Id;
+
 public class BaseModel {
 	@Id
-	String id;
-	String name;
-	String desc;
-	Double price;
-	String img;
+	protected String id;
+	protected Timestamp timestamp;
+	protected Timestamp updatedTimstamp;
+	protected String status;
 	
 	public BaseModel() {
 		
 	}
-	
-	public BaseModel(String id, String name, String desc, Double price, String img) {
-		this.name = name;
-		this.desc = desc;
-		this.price = price;
-		this.img = img;
+
+	public BaseModel(String id, Timestamp timestamp, Timestamp updatedTimstamp, String status) {
+		super();
+		this.id = id;
+		this.timestamp = timestamp;
+		this.updatedTimstamp = updatedTimstamp;
+		this.status = status;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+	public Timestamp getTimestamp() {
+		return timestamp;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
-	public String getDesc() {
-		return desc;
+
+	public Timestamp getUpdatedTimstamp() {
+		return updatedTimstamp;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+
+	public void setUpdatedTimstamp(Timestamp updatedTimstamp) {
+		this.updatedTimstamp = updatedTimstamp;
 	}
-	public Double getPrice() {
-		return price;
+
+	public String getStatus() {
+		return status;
 	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

@@ -2,8 +2,8 @@ package org.masbas.idvn.controllers;
 
 import java.util.Optional;
 
-import org.masbas.idvn.models.BaseModel;
-import org.masbas.idvn.repositories.BaseRepository;
+import org.masbas.idvn.models.BasedModel;
+import org.masbas.idvn.repositories.BasedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class BaseController {
+public class BasedController {
 	
 	@Autowired
-	BaseRepository baseRepository;
+	BasedRepository basedRepository;
 	
 	@RequestMapping("/base")
 	public String base(Model model) {
-		model.addAttribute("bases", baseRepository.findAll());
+		model.addAttribute("bases", basedRepository.findAll());
 		return "content/base/base";
 	}
 	
@@ -41,33 +41,33 @@ public class BaseController {
 //            , consumes = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
 //    )
 	@PostMapping("/save")
-	public String save(@ModelAttribute BaseModel baseModel) {
-		BaseModel base = new BaseModel();
-		base.setName(baseModel.getName());
-		base.setDesc(baseModel.getDesc());
-		base.setImg(baseModel.getImg());
-		base.setPrice(baseModel.getPrice());
-		baseRepository.save(base);
+	public String save(@ModelAttribute BasedModel basedModel) {
+		BasedModel base = new BasedModel();
+		base.setName(basedModel.getName());
+		base.setDesc(basedModel.getDesc());
+		base.setImg(basedModel.getImg());
+		base.setPrice(basedModel.getPrice());
+		basedRepository.save(base);
 		
 		return "redirect:/show/" + base.getId();
 	}
 	
 	@RequestMapping("/show/{id}")
 	public String show(@PathVariable String id, Model model) {
-		model.addAttribute("base", baseRepository.findById(id).get());
+		model.addAttribute("base", basedRepository.findById(id).get());
 		return "content/base/show";
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam String id) {
-		Optional<BaseModel> base = baseRepository.findById(id);
-		baseRepository.delete(base.get());
+		Optional<BasedModel> base = basedRepository.findById(id);
+		basedRepository.delete(base.get());
 		return "redirect:/base";
 	}
 	
 	@RequestMapping("/edit/{id}")
 	public String edit(@PathVariable String id, Model model) {
-		model.addAttribute("base", baseRepository.findById(id).get());
+		model.addAttribute("base", basedRepository.findById(id).get());
 		return "content/base/edit";
 	}
 	
@@ -78,12 +78,12 @@ public class BaseController {
 			@RequestParam String desc, 
 			@RequestParam Double price, 
 			@RequestParam String img) {
-		Optional<BaseModel> base = baseRepository.findById(id);
+		Optional<BasedModel> base = basedRepository.findById(id);
 		base.get().setName(name);
 		base.get().setDesc(desc);
 		base.get().setImg(img);
 		base.get().setPrice(price);
-		baseRepository.save(base.get());
+		basedRepository.save(base.get());
 		
 		return "redirect:/show/" + base.get().getId();
 	}
