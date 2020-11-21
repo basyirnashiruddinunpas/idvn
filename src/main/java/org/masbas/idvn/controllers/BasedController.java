@@ -30,7 +30,7 @@ public class BasedController {
 		return "content/base/base";
 	}
 	
-	@RequestMapping("/create")
+	@RequestMapping("/base/create")
 	public String create(Model model) {
 		return "content/base/create";
 	}
@@ -40,7 +40,7 @@ public class BasedController {
 //            , produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE
 //            , consumes = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
 //    )
-	@PostMapping("/save")
+	@PostMapping("/base/save")
 	public String save(@ModelAttribute BasedModel basedModel) {
 		BasedModel base = new BasedModel();
 		base.setName(basedModel.getName());
@@ -49,30 +49,30 @@ public class BasedController {
 		base.setPrice(basedModel.getPrice());
 		basedRepository.save(base);
 		
-		return "redirect:/show/" + base.getId();
+		return "redirect:/base/show/" + base.getId();
 	}
 	
-	@RequestMapping("/show/{id}")
+	@RequestMapping("/base/show/{id}")
 	public String show(@PathVariable String id, Model model) {
 		model.addAttribute("base", basedRepository.findById(id).get());
 		return "content/base/show";
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/base/delete")
 	public String delete(@RequestParam String id) {
 		Optional<BasedModel> base = basedRepository.findById(id);
 		basedRepository.delete(base.get());
 		return "redirect:/base";
 	}
 	
-	@RequestMapping("/edit/{id}")
+	@RequestMapping("/base/edit/{id}")
 	public String edit(@PathVariable String id, Model model) {
 		model.addAttribute("base", basedRepository.findById(id).get());
 		return "content/base/edit";
 	}
 	
 //	UPDATE DISINI MASIH PAKAI GET
-	@RequestMapping("/update")
+	@RequestMapping("/base/update")
 	public String update(@RequestParam String id, 
 			@RequestParam String name, 
 			@RequestParam String desc, 
@@ -85,6 +85,6 @@ public class BasedController {
 		base.get().setPrice(price);
 		basedRepository.save(base.get());
 		
-		return "redirect:/show/" + base.get().getId();
+		return "redirect:/base/show/" + base.get().getId();
 	}
 }

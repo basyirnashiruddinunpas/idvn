@@ -21,10 +21,10 @@
                     <dt>base Price</dt>
                     <dd th:text="${base.price}"></dd>
                 </dl>
-                <form action="/delete">
+                <form action="/base/delete">
                     <input type="hidden" name="id" th:value="${base.id}" />
                     <h2><input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure?');" />
-                        <a th:href="@{'/edit/' + ${base.id}}" class="btn btn-warning">Edit</a></h2>
+                        <a th:href="@{'/base/edit/' + ${base.id}}" class="btn btn-warning">Edit</a></h2>
                 </form>
             </div>
         </div>

@@ -3,6 +3,8 @@ package org.masbas.idvn.config;
 import org.masbas.idvn.helpers.AuthFailureHandler;
 import org.masbas.idvn.helpers.AuthLogoutSuccessHandler;
 import org.masbas.idvn.helpers.UserHelper;
+import org.masbas.idvn.services.MyUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,9 +20,12 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Configuration
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
- 
+ 	
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+    	
+    	auth.userDetailsService(userDetailsService());
+    	
     	PasswordEncoder encoder = 
     	          PasswordEncoderFactories.createDelegatingPasswordEncoder();
     	    	auth
@@ -41,7 +46,8 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/admin/**").hasRole(UserHelper.TIPE_ADMIN)
         .antMatchers("/").permitAll()
-        .antMatchers("/base").permitAll()
+        .antMatchers("/base*").permitAll()
+        .antMatchers("/base/*").permitAll()
         .antMatchers("/home").permitAll()
         .antMatchers("/login*").permitAll()
         .antMatchers("/register*").permitAll()
@@ -73,5 +79,10 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler() {
     	return new AuthLogoutSuccessHandler();
+    }
+    
+    @Bean
+    public MyUserDetailService userDetailsService() {
+    	return new MyUserDetailService();
     }
 }

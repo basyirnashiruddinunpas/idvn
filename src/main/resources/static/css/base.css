@@ -1,0 +1,97 @@
+.cvss-wrapper {
+	width: 865px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border-top: solid 1px #eee;
+	border-bottom: solid 1px #eee;
+}
+.cvss-wrapper + .cvss-wrapper {
+	border-top: none;
+	margin-top: -30px;
+}
+.cvss-line {
+	padding: 15px 0;
+	cursor: pointer;
+}
+.cvss-line .cvss-version {
+	display: inline-block;
+	width: 208px;
+	padding-left: 10px;
+}
+.cvss-line .base-score {
+	display: inline-block;
+	font-weight: bold;
+}
+.cvss-line .cvss-vector-string {
+	display: inline-block;
+}
+.cvss-line .cvss-toggle-marker {
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10px 6px 0 6px;
+	border-color: #007bff  transparent transparent transparent;
+	margin-left: 15px;
+}
+.cvss-line .cvss-toggle-marker-expand {
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 6px 10px 6px;
+	border-color: transparent transparent #007bff  transparent;
+	margin-left: 15px;
+}
+.cvss-line .cvss-right-elem {
+	float: right;
+}
+.clearfix:after {
+	display: block;
+	clear: both;
+	content: "";
+}
+
+.cvss-table {
+	border-collapse: separate;
+	border-spacing: 1px 15px;
+	margin-bottom: 30px;
+}
+.cvss-table tr {
+	margin-top: 5px;
+}
+.cvss-table th {
+	font-size: 14px;
+	height: 30px;
+	width: 200px;
+	text-align: right;
+	background-color: #fff;
+	padding-right: 15px;
+}
+.cvss-table td {
+	font-size: 14px;
+	height: 30px;
+	width: 150px;
+	border: none;
+	text-align: center;
+}
+.cvss-table td:nth-child(2) {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+.cvss-table td:last-child {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+.cvss-table .selected {
+	background-color: #bcd0f2;
+	font-weight: bold;
+}
+.cvss-table .unselected {
+	color: #6b6b6b;
+	background-color: #e1e1e1;
+}
