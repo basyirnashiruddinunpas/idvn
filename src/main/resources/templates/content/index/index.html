@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/headerFragment :: header" th:remove="tag"></div>
+    <link href="../static/css/base.css" rel="stylesheet" th:href="@{/css/base.css}" />
+</head>
+<body>
+	<div th:replace="/fragments/navFragment :: nav" th:remove="tag"></div>
+    <div class="container mt-lg-2">
+        <div class="row w-100">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">IDVN</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row border">
+            <div class="col-md-12">
+                <h4 style="margin-top: 10px; margin-bottom: 30px;">Kerentanan Terbaru</h4>
+            </div>
+            <div class="col">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 200px;" scope="row"><a href="#"
+                                    class="text-secondary">IDVN#2020-1010001</a></th>
+                            <td><a href="#">Admin Panel Indihome pada perangkat huawei DP-05822 rentan akan serangan
+                                    cross-site request forgery pada menu admin [14 Oktober 2020, 13:00]</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><a href="#" class="text-secondary">IDVN#2020-1010001</a></th>
+                            <td><a href="#">Admin Panel Indihome pada perangkat huawei DP-05822 rentan akan serangan
+                                    cross-site request forgery pada menu admin [14 Oktober 2020, 13:00]</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><a href="#" class="text-secondary">IDVN#2020-1010001</a></th>
+                            <td><a href="#">Admin Panel Indihome pada perangkat huawei DP-05822 rentan akan serangan
+                                    cross-site request forgery pada menu admin [14 Oktober 2020, 13:00]</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row border" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <h4 style="margin-top: 10px; margin-bottom: 30px;">Tracking Kerentanan</h4>
+            </div>
+            <div class="col">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 200px;" scope="row"><a href="#"
+                                    class="text-secondary">IDVN#2020-1010001</a></th>
+                            <td><a href="#">Admin Panel Indihome pada perangkat huawei DP-05822 rentan akan serangan
+                                    cross-site request forgery pada menu admin [14 Oktober 2020, 13:00]</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><a href="#" class="text-secondary">IDVN#2020-1010001</a></th>
+                            <td><a href="#">Admin Panel Indihome pada perangkat huawei DP-05822 rentan akan serangan
+                                    cross-site request forgery pada menu admin [14 Oktober 2020, 13:00]</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><a href="#" class="text-secondary">IDVN#2020-1010001</a></th>
+                            <td><a href="#">Admin Panel Indihome pada perangkat huawei DP-05822 rentan akan serangan
+                                    cross-site request forgery pada menu admin [14 Oktober 2020, 13:00]</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
+
+</body>
+
+</html>

@@ -1,35 +1,20 @@
 package org.masbas.idvn.viewmodels;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import org.masbas.idvn.helpers.validators.PasswordMatches;
-import org.masbas.idvn.helpers.validators.ValidEmail;
 import org.masbas.idvn.models.UserModel;
 
-@PasswordMatches
 public class RegistrationDto {
 	
-	@NotNull
-	@NotEmpty
 	private String name;
 	
-	@NotNull
-	@NotEmpty
-	@ValidEmail
 	private String email;
 	
-	@NotNull
-	@NotEmpty
 	private String password;
 	
 	private String matchingPassword;
 	
-	@NotNull
-	@NotEmpty
 	private String contact;
 	
 	private String tipeUser;
@@ -44,8 +29,8 @@ public class RegistrationDto {
 	
 	private List<String> insidentHandler;
 	
-	private ZonedDateTime createdTimeStamp;
-	private ZonedDateTime updateTimeStamp;
+	private Date createdTimeStamp;
+	private Date updateTimeStamp;
 	public String getName() {
 		return name;
 	}
@@ -112,16 +97,16 @@ public class RegistrationDto {
 	public void setInsidentHandler(List<String> insidentHandler) {
 		this.insidentHandler = insidentHandler;
 	}
-	public ZonedDateTime getCreatedTimeStamp() {
+	public Date getCreatedTimeStamp() {
 		return createdTimeStamp;
 	}
-	public void setCreatedTimeStamp(ZonedDateTime createdTimeStamp) {
+	public void setCreatedTimeStamp(Date createdTimeStamp) {
 		this.createdTimeStamp = createdTimeStamp;
 	}
-	public ZonedDateTime getUpdateTimeStamp() {
+	public Date getUpdateTimeStamp() {
 		return updateTimeStamp;
 	}
-	public void setUpdateTimeStamp(ZonedDateTime updateTimeStamp) {
+	public void setUpdateTimeStamp(Date updateTimeStamp) {
 		this.updateTimeStamp = updateTimeStamp;
 	}
 	

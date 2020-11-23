@@ -2,63 +2,13 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico" />
-
-    <title>Navbar Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <div th:replace="/fragments/headerFragment :: header" th:remove="tag"></div>
     <link href="../static/css/base.css" rel="stylesheet" th:href="@{/css/base.css}" />
-    <link href="../static/css/cvss.css" rel="stylesheet" th:href="@{/css/cvss.css}" />
-    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 </head>
-
 <body>
     <form action="#" method="POST">
-        <div class="d-inline-flex p-2">
-            <h1>IDVN</h1>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-info" style="background-color: #DCEDF6!important;">
-            <a class="navbar-brand text-dark" href="#">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Daftar Kerentanan
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Kerentanan Terbaru</a>
-                            <a class="dropdown-item" href="#">Tracking Kerentanan</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Lapor</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/login') }}">Masuk</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="d-flex flex-row-reverse bg-secondary" style="height: 40px;">
-            <div class="p-2 text-light">Kerentanan Tercatat: 222</div>
-        </div>
+        
+	<div th:replace="/fragments/navFragment :: nav" th:remove="tag"></div>
         <div class="container mt-lg-2">
             <div class="row w-100">
                 <nav aria-label="breadcrumb">
@@ -118,8 +68,86 @@
                     <div class="cvss-wrapper">
                         <div id="cvss-v3-line" class="cvss-line">
                             <span class="cvss-version">CVSS v3</span>
+                            <span id="cvss-v3-vector-string" class="cvss-vector-string">CVSS:3.0/</span>
+                            <div class="cvss-right-elem clearfix">
+                                <div class="base-score">
+                                    <span class="base-score-label">Base Score:</span>
+                                    <span id="cvss-v3-base-score"> - </span>
+                                </div>
+                            </div>
                         </div>
-                        <div id="cvssboard"> </div>
+                        <table id="cvss-v3-table" class="cvss-table" style="display: block;">
+                            <tbody>
+                                <tr>
+                                    <th>Attack Vector(AV)</th>
+                                    <td class="unselected">
+                                        Physical (P) </td>
+                                    <td class="unselected">
+                                        Local (L) </td>
+                                    <td class="unselected">
+                                        Adjacent (A) </td>
+                                    <td class="unselected">
+                                        Network (N) </td>
+                                </tr>
+                                <tr>
+                                    <th>Attack Complexity(AC)</th>
+                                    <td class="unselected">
+                                        High (H) </td>
+                                    <td class="unselected">
+                                        Low (L) </td>
+                                </tr>
+                                <tr>
+                                    <th>Privileges Required(PR)</th>
+                                    <td class="unselected">
+                                        High (H) </td>
+                                    <td class="unselected">
+                                        Low (L) </td>
+                                    <td class="unselected">
+                                        None (N) </td>
+                                </tr>
+                                <tr>
+                                    <th>User Interaction(UI)</th>
+                                    <td class="unselected">
+                                        Required (R) </td>
+                                    <td class="unselected">
+                                        None (N) </td>
+                                </tr>
+                                <tr>
+                                    <th>Scope(S)</th>
+                                    <td class="unselected">
+                                        Unchanged (U) </td>
+                                    <td class="unselected">
+                                        Changed (C) </td>
+                                </tr>
+                                <tr>
+                                    <th>Confidentiality Impact(C)</th>
+                                    <td class="unselected">
+                                        None (N) </td>
+                                    <td class="unselected">
+                                        Low (L) </td>
+                                    <td class="unselected">
+                                        High (H) </td>
+                                </tr>
+                                <tr>
+                                    <th>Integrity Impact(I)</th>
+                                    <td class="unselected">
+                                        None (N) </td>
+                                    <td class="unselected">
+                                        Low (L) </td>
+                                    <td class="unselected">
+                                        High (H) </td>
+                                </tr>
+                                <tr>
+                                    <th>Availability Impact(A)</th>
+                                    <td class="unselected">
+                                        None (N) </td>
+                                    <td class="unselected">
+                                        Low (L) </td>
+                                    <td class="unselected">
+                                        High (H) </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- End Content Isi -->
                 </div>
@@ -162,32 +190,8 @@
         </div>
     </form>
 
-    <div class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container">
-            <p class="navbar-text">Copyright © 2020 IDVN</p>
-        </div>
-    </div>
-    <script src="../static/js/cvss.js" th:src="@{/js/cvss.js}"></script>
+    <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
 
-    <script>
-        var c = new CVSS("cvssboard", {
-            onchange: function() {
-                window.location.hash = c.get().vector;
-                c.vector.setAttribute('href', '#' + c.get().vector)
-            }
-        });
-        if (window.location.hash.substring(1).length > 0) {
-            c.set(decodeURIComponent(window.location.hash.substring(1)));
-        }
-    </script>
-    <!-- END MODAL -->
-
-    <!-- /container -->
-    <!-- Bootstrap core JavaScript
-================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 </body>
 
 </html>

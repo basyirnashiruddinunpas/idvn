@@ -23,11 +23,17 @@ public class BasedController {
 	
 	@Autowired
 	BasedRepository basedRepository;
-	
+
 	@RequestMapping("/base")
 	public String base(Model model) {
 		model.addAttribute("bases", basedRepository.findAll());
 		return "content/base/base";
+	}
+	
+	@RequestMapping("/bases")
+	public String bases(Model model) {
+		model.addAttribute("bases", basedRepository.findAll());
+		return "content/edit/edit_vendor";
 	}
 	
 	@RequestMapping("/base/create")

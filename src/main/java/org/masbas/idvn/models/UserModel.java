@@ -1,11 +1,12 @@
 package org.masbas.idvn.models;
 
-import java.security.Timestamp;
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "user")
 public class UserModel {
 	
 	@Id
@@ -16,14 +17,15 @@ public class UserModel {
 	private String password;
 	private String contact;
 	private String tipeUser;
+	private List<String> roles;
 	private String status;
 	private int reputation;
 	private String website;
 	private List<UserModel> auditor;
 	private List<String> insidentHandler;
 	
-	private ZonedDateTime createdTimeStamp;
-	private ZonedDateTime updatedTimeStamp;
+	private Date createdTimeStamp;
+	private Date updatedTimeStamp;
 	
 	public String getId() {
 		return id;
@@ -61,16 +63,16 @@ public class UserModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public ZonedDateTime getCreatedTimeStamp() {
+	public Date getCreatedTimeStamp() {
 		return createdTimeStamp;
 	}
-	public void setCreatedTimeStamp(ZonedDateTime createdTimeStamp) {
+	public void setCreatedTimeStamp(Date createdTimeStamp) {
 		this.createdTimeStamp = createdTimeStamp;
 	}
-	public ZonedDateTime getUpdatedTimeStamp() {
+	public Date getUpdatedTimeStamp() {
 		return updatedTimeStamp;
 	}
-	public void setUpdatedTimeStamp(ZonedDateTime updatedTimeStamp) {
+	public void setUpdatedTimeStamp(Date updatedTimeStamp) {
 		this.updatedTimeStamp = updatedTimeStamp;
 	}
 	public int getReputation() {
@@ -102,6 +104,12 @@ public class UserModel {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<String> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 	

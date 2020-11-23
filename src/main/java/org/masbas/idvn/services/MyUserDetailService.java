@@ -3,6 +3,7 @@ package org.masbas.idvn.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.masbas.idvn.models.CurrentUser;
 import org.masbas.idvn.models.UserModel;
 import org.masbas.idvn.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,29 +19,37 @@ public class MyUserDetailService implements UserDetailsService {
     // 
     public UserDetails loadUserByUsername(String email)
       throws UsernameNotFoundException {
- 
+    	System.out.println("EMAIL: " + email);
+    	System.out.println("BEGIN");
         UserModel user = userRepository.findByEmail(email);
+        for (UserModel ele : userRepository.findAll()) {
+			System.out.println(ele.getEmail());
+		}
         if (user == null) {
+        	System.out.println("BEGIN2");
             throw new UsernameNotFoundException(
               "No user found with username: "+ email);
         }
+    	System.out.println("BEGIN3");
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        List<String> grant = new ArrayList<String>();
-        grant.add(user.getTipeUser());
         
-        return  new org.springframework.security.core.userdetails.User
-          (user.getEmail(), 
-          user.getPassword().toLowerCase(), enabled, accountNonExpired, 
-          credentialsNonExpired, accountNonLocked, 
-          getAuthorities(grant));
+        System.out.println("LOGIN SUCCESS HERE");
+        
+        CurrentUser currUser = new CurrentUser
+                (user.getEmail(), 
+                        user.getPassword(), enabled, accountNonExpired, 
+                        credentialsNonExpired, accountNonLocked, 
+                        getAuthorities(user.getRoles()));
+        currUser.setUserModel(user);
+        return  currUser;
     }
     
-    private static List<GrantedAuthority> getAuthorities (List<String> roles) {
+    private static List<GrantedAuthority> getAuthorities (List<String> list) {
         List<GrantedAuthority> authorities = new ArrayList();
-        for (String role : roles) {
+        for (String role : list) {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
