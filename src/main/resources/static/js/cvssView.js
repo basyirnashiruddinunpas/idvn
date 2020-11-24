@@ -47,9 +47,9 @@ Usage:
     
 */
 
-var CVSS = function (id, options) {
-    this.options = options;
+var CVSS = function (id, def) {
     this.wId = id;
+    this.def = def;
     var e = function (tag) {
         return document.createElement(tag);
     };
@@ -215,6 +215,7 @@ var CVSS = function (id, options) {
             inp.setAttribute('id', id + g + s);
             inp.setAttribute('class', g + s);
             inp.setAttribute('type', 'radio');
+            inp.setAttribute('disabled', 'true');
             this.bme[g + s] = inp;
             var me = this;
             inp.onchange = function () {
@@ -245,12 +246,6 @@ var CVSS = function (id, options) {
     this.vector.className = 'vector';
     this.vector.innerHTML = 'CVSS:3.0/AV:_/AC:_/PR:_/UI:_/S:_/C:_/I:_/A:_';
     
-    if (options.onsubmit) {
-        f.appendChild(e('hr'));
-        this.submitButton = f.appendChild(e('input'));
-        this.submitButton.setAttribute('type', 'submit');
-        this.submitButton.onclick = options.onsubmit;
-    }
 };
 
 CVSS.prototype.severityRatings = [{
@@ -446,15 +441,10 @@ CVSS.prototype.set = function(vec) {
 
 CVSS.prototype.update = function(newVec) {
     this.vector.innerHTML = newVec;
-    document.getElementById("vectorString").value = newVec;
-    document.getElementById("vectorStr").value = newVec;
     var s = this.calculate();
     this.score.innerHTML = s;
     var rating = this.severityRating(s);
     this.severity.className = rating.name + ' severity';
     this.severity.innerHTML = rating.name + '<sub>' + rating.bottom + ' - ' + rating.top + '</sub>';
     this.severity.title = rating.bottom + ' - ' + rating.top;
-    if (this.options !== undefined && this.options.onchange !== undefined) {
-        this.options.onchange();
-    }
 };

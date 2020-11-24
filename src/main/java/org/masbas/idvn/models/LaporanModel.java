@@ -4,25 +4,31 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "user")
+@Document(collection = "laporan")
 public class LaporanModel {
 	
 	@Id
 	private String id;
 	
+	private String code;
 	private String overview;
 	private String productAffected;
 	private String description;
 	private String impact;
 	private List<WorkaroundModel> workarounds;
 	private List<StatusVendorModel> statusVendor;
+	
+	@DBRef
 	private UserModel vendor;	
 	private String references;
 	private String vectorString;
 	private String status;
+	@DBRef
 	private UserModel createdBy;
+	@DBRef
 	private UserModel editedBy;
 	private Date createdTimeStamp;
 	private Date updatedTimeStamp;
@@ -116,6 +122,12 @@ public class LaporanModel {
 	}
 	public void setUpdatedTimeStamp(Date updatedTimeStamp) {
 		this.updatedTimeStamp = updatedTimeStamp;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

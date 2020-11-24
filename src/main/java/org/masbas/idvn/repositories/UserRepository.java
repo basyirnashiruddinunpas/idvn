@@ -1,4 +1,6 @@
 package org.masbas.idvn.repositories;
+import java.util.List;
+
 import org.masbas.idvn.models.UserModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -16,5 +18,8 @@ public interface UserRepository extends MongoRepository<UserModel, String> {
 	
 	@Query("{'email': ?0, 'password': ?1}")
 	public UserModel findByEmailPassword(String email, String password);
+	
+	@Query("{'roles': ['ROLE_VENDOR']}")
+	public List<UserModel> findAllVendor();
 	
 }

@@ -4,9 +4,10 @@
 <head>
     <div th:replace="/fragments/headerFragment :: header" th:remove="tag"></div>
     <link href="../static/css/base.css" rel="stylesheet" th:href="@{/css/base.css}" />
+    <link href="../static/css/cvss.css" rel="stylesheet" th:href="@{/css/cvss.css}" />
 </head>
 <body>
-    <form action="#" method="POST">
+    <form action="/kerentanan/save" method="POST">
         
 	<div th:replace="/fragments/navFragment :: nav" th:remove="tag"></div>
         <div class="container mt-lg-2">
@@ -43,16 +44,14 @@
                     </div>
                     <div class="form-group">
                         <label for="vendor">Vendor</label>
-                        <select class="form-control" id="vendor" name="vendor">
-                            <option>-- Pilih --</option>
-                            <option>PT. Telkom</option>
-                            <option>PT. Wacahyana</option>
-                            <option>PT. Bank Jabar Banten</option>
+                        <select class="form-control" name="vendorStr" id="vendorStr">
+                            <option value="" selected>-- Pilih --</option>
+                            <option th:each="vendor : ${vendors}" th:value="${vendor.id}" th:text="${vendor.name}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="reference">Referensi</label>
-                        <input type="text" class="form-control" name="reference" id="reference" placeholder="Referensi">
+                        <input type="text" class="form-control" name="references" id="references" placeholder="Referensi">
                     </div>
                     <!-- Content Isi -->
 
@@ -62,92 +61,15 @@
                     </div>
                     <div class="form-group">
                         <label for="vectorString">Vector String</label>
-                        <input type="text" class="form-control" name="vectorString" id="vectorString"
+                        <input type="text" class="form-control" name="vectorStr" id="vectorStr"
                             placeholder="CVSS:3.0/" disabled>
+                        <input type="hidden" class="form-control" name="vectorString" id="vectorString">
                     </div>
                     <div class="cvss-wrapper">
                         <div id="cvss-v3-line" class="cvss-line">
                             <span class="cvss-version">CVSS v3</span>
-                            <span id="cvss-v3-vector-string" class="cvss-vector-string">CVSS:3.0/</span>
-                            <div class="cvss-right-elem clearfix">
-                                <div class="base-score">
-                                    <span class="base-score-label">Base Score:</span>
-                                    <span id="cvss-v3-base-score"> - </span>
-                                </div>
-                            </div>
                         </div>
-                        <table id="cvss-v3-table" class="cvss-table" style="display: block;">
-                            <tbody>
-                                <tr>
-                                    <th>Attack Vector(AV)</th>
-                                    <td class="unselected">
-                                        Physical (P) </td>
-                                    <td class="unselected">
-                                        Local (L) </td>
-                                    <td class="unselected">
-                                        Adjacent (A) </td>
-                                    <td class="unselected">
-                                        Network (N) </td>
-                                </tr>
-                                <tr>
-                                    <th>Attack Complexity(AC)</th>
-                                    <td class="unselected">
-                                        High (H) </td>
-                                    <td class="unselected">
-                                        Low (L) </td>
-                                </tr>
-                                <tr>
-                                    <th>Privileges Required(PR)</th>
-                                    <td class="unselected">
-                                        High (H) </td>
-                                    <td class="unselected">
-                                        Low (L) </td>
-                                    <td class="unselected">
-                                        None (N) </td>
-                                </tr>
-                                <tr>
-                                    <th>User Interaction(UI)</th>
-                                    <td class="unselected">
-                                        Required (R) </td>
-                                    <td class="unselected">
-                                        None (N) </td>
-                                </tr>
-                                <tr>
-                                    <th>Scope(S)</th>
-                                    <td class="unselected">
-                                        Unchanged (U) </td>
-                                    <td class="unselected">
-                                        Changed (C) </td>
-                                </tr>
-                                <tr>
-                                    <th>Confidentiality Impact(C)</th>
-                                    <td class="unselected">
-                                        None (N) </td>
-                                    <td class="unselected">
-                                        Low (L) </td>
-                                    <td class="unselected">
-                                        High (H) </td>
-                                </tr>
-                                <tr>
-                                    <th>Integrity Impact(I)</th>
-                                    <td class="unselected">
-                                        None (N) </td>
-                                    <td class="unselected">
-                                        Low (L) </td>
-                                    <td class="unselected">
-                                        High (H) </td>
-                                </tr>
-                                <tr>
-                                    <th>Availability Impact(A)</th>
-                                    <td class="unselected">
-                                        None (N) </td>
-                                    <td class="unselected">
-                                        Low (L) </td>
-                                    <td class="unselected">
-                                        High (H) </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div id="cvssboard"> </div>
                     </div>
                     <!-- End Content Isi -->
                 </div>
@@ -191,6 +113,19 @@
     </form>
 
     <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
+    <script src="../static/js/cvss.js" th:src="@{/js/cvss.js}"></script>
+
+    <script>
+        var c = new CVSS("cvssboard", {
+            onchange: function() {
+                window.location.hash = c.get().vector;
+                c.vector.setAttribute('href', '#' + c.get().vector)
+            }
+        });
+        if (window.location.hash.substring(1).length > 0) {
+            c.set(decodeURIComponent(window.location.hash.substring(1)));
+        }
+    </script>
 
 </body>
 

@@ -3,6 +3,7 @@ package org.masbas.idvn.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.masbas.idvn.helpers.UserHelper;
 import org.masbas.idvn.helpers.exceptions.UserAlreadyExistException;
@@ -64,6 +65,10 @@ public class UserService implements IUserService {
 	
 	public UserModel getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+	
+	public List<UserModel> findAllVendor() {
+		return userRepository.findAllVendor();
 	}
 	
 }

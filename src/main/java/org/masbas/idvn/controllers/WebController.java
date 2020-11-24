@@ -7,6 +7,7 @@ import org.masbas.idvn.helpers.UserHelper;
 import org.masbas.idvn.helpers.exceptions.UserAlreadyExistException;
 import org.masbas.idvn.models.UserModel;
 import org.masbas.idvn.repositories.UserRepository;
+import org.masbas.idvn.services.LaporanService;
 import org.masbas.idvn.services.UserService;
 import org.masbas.idvn.viewmodels.LoginDto;
 import org.masbas.idvn.viewmodels.RegistrationDto;
@@ -31,6 +32,9 @@ public class WebController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	LaporanService laporanService;
 	
 	@Autowired
 	public WebController(Environment environment) {
@@ -97,6 +101,10 @@ public class WebController {
 		}
 		
 		return("redirect:/home");
+	}
+	
+	public int getTotalLaporan() {
+		return laporanService.findTotalKerentanan().intValue();
 	}
 
 }
