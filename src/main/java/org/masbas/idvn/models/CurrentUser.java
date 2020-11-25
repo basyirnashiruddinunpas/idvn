@@ -14,15 +14,15 @@ public class CurrentUser extends User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public UserModel getUserModel() {
+	public UserDao getUserModel() {
 		return userModel;
 	}
 
-	public void setUserModel(UserModel userModel) {
+	public void setUserModel(UserDao userModel) {
 		this.userModel = userModel;
 	}
 
-	private UserModel userModel;
+	private UserDao userModel;
 	
 
 }

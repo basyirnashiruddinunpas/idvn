@@ -11,7 +11,8 @@
         <div class="row w-100">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">IDVN</li>
+                    <li class="breadcrumb-item"><a th:href="@{/}">IDVN</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My IDVN</li>
                 </ol>
             </nav>
         </div>
@@ -24,10 +25,10 @@
                     <tbody>
                         <tr th:each="laporan : ${kerentananTerbaru}">
                             <th style="width: 200px;" scope="row">
-                            	<a th:href="@{/kerentanan/show/}+${laporan.code}" class="text-secondary" th:text="${laporan.code}"></a>
+                            	<a th:href="@{/kerentanan/my/show/}+${laporan.code}" class="text-secondary" th:text="${laporan.code}"></a>
                             </th>
                             <td>
-                            	<a th:href="@{/kerentanan/show/}+${laporan.code}" >
+                            	<a th:href="@{/kerentanan/my/show/}+${laporan.code}" >
 	                            	<p th:text="${laporan.overview}" th:remove="tag"></p> [
 	                            	<p th:text="${#dates.format(laporan.createdTimeStamp, 'dd MMMM yyyy, hh:mm')}" th:remove="tag"></p> ]
 	                            </a>
@@ -37,7 +38,7 @@
                 </table>
             </div>
             <div class="col-md-12">
-                <a th:href="@{/kerentanan/terbaru}">Tampil lebih banyak..</a>
+                <a th:href="@{/kerentanan/my/terbaru}">Tampil lebih banyak..</a>
             </div>
         </div>
         <div class="row border" style="margin-top: 10px;">
@@ -49,10 +50,10 @@
                     <tbody>
                         <tr th:each="laporan : ${trackingKerentanan}">
                             <th style="width: 200px;" scope="row">
-                            	<a th:href="@{/kerentanan/show/}+${laporan.code}" class="text-secondary" th:text="${laporan.code}"></a>
+                            	<a th:href="@{/kerentanan/my/show/}+${laporan.code}" class="text-secondary" th:text="${laporan.code}"></a>
                             </th>
                             <td>
-                            	<a th:href="@{/kerentanan/show/}+${laporan.code}" >
+                            	<a th:href="@{/kerentanan/my/show/}+${laporan.code}" >
                             		<span th:attr="class=${laporan.status=='PATCHED' ? 'badge badge-primary' : 'badge badge-secondary'}" th:text="${laporan.status}"></span>
 	                            	<p th:text="${laporan.overview}" th:remove="tag"></p> [
 	                            	<p th:text="${#dates.format(laporan.createdTimeStamp, 'dd MMMM yyyy, hh:mm')}" th:remove="tag"></p> ]
@@ -63,7 +64,32 @@
                 </table>
             </div>
             <div class="col-md-12">
-                <a th:href="@{/kerentanan/terbaru}">Tampil lebih banyak..</a>
+                <a th:href="@{/kerentanan/my/tracking}">Tampil lebih banyak..</a>
+            </div>
+        </div>
+        <div class="row border" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <h4 style="margin-top: 10px; margin-bottom: 30px;">Kerentanan Tidak Valid</h4>
+            </div>
+            <div class="col">
+                <table class="table">
+                    <tbody>
+                        <tr th:each="laporan : ${kerentananInvalid}">
+                            <th style="width: 200px;" scope="row">
+                            	<a th:href="@{/kerentanan/my/show/}+${laporan.code}" class="text-secondary" th:text="${laporan.code}"></a>
+                            </th>
+                            <td>
+                            	<a th:href="@{/kerentanan/my/show/}+${laporan.code}" >
+	                            	<p th:text="${laporan.overview}" th:remove="tag"></p> [
+	                            	<p th:text="${#dates.format(laporan.createdTimeStamp, 'dd MMMM yyyy, hh:mm')}" th:remove="tag"></p> ]
+	                            </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <a th:href="@{/kerentanan/my/invalid}">Tampil lebih banyak..</a>
             </div>
         </div>
     </div>

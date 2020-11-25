@@ -1,14 +1,22 @@
 package org.masbas.idvn.services;
 
+import java.util.List;
+
 import org.masbas.idvn.helpers.exceptions.UserAlreadyExistException;
-import org.masbas.idvn.models.UserModel;
+import org.masbas.idvn.models.UserDao;
 import org.masbas.idvn.viewmodels.RegistrationDto;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public interface IUserService {
 	
-	UserModel registerNewUserAccount(RegistrationDto userDto)
+	UserDao registerNewUserAccount(RegistrationDto userDto)
 		throws UserAlreadyExistException;
 	
-	public UserModel getUserById(String id);
+	public UserDao loginUser(String email, String password);
+	
+	public UserDao getUserById(String id);
+	
+	public UserDao getUserByEmail(String email);
+	
+	public List<UserDao> findAllVendor();
+	
 }

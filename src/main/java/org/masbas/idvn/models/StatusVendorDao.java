@@ -6,26 +6,31 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "workaround")
-public class WorkaroundModel {
+@Document(collection = "status_vendor")
+public class StatusVendorDao {
 	@Id
 	private String id;
-	private String solution;
-	
+	private String statusVendor;
+	private String catatanVendor;
 	private Date createdTimestamp;
 	private Date updatedTimestamp;
-	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getSolution() {
-		return solution;
+	public String getStatusVendor() {
+		return statusVendor;
 	}
-	public void setSolution(String solution) {
-		this.solution = solution;
+	public void setStatusVendor(String statusVendor) {
+		this.statusVendor = statusVendor;
+	}
+	public String getCatatanVendor() {
+		return catatanVendor;
+	}
+	public void setCatatanVendor(String catatanVendor) {
+		this.catatanVendor = catatanVendor;
 	}
 	public Date getCreatedTimestamp() {
 		return createdTimestamp;
@@ -39,6 +44,6 @@ public class WorkaroundModel {
 	public void setUpdatedTimestamp(Date updatedTimestamp) {
 		this.updatedTimestamp = updatedTimestamp;
 	}
-
+	
 	
 }

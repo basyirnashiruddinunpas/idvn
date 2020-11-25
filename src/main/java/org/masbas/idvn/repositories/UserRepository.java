@@ -1,25 +1,29 @@
 package org.masbas.idvn.repositories;
 import java.util.List;
 
-import org.masbas.idvn.models.UserModel;
+import org.bson.types.ObjectId;
+import org.masbas.idvn.models.UserDao;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-public interface UserRepository extends MongoRepository<UserModel, String> {
+public interface UserRepository extends MongoRepository<UserDao, String> {
 	
 	@Query("{'email': ?0}")
-	public UserModel findByEmail(String email);
+	public UserDao findByEmail(String email);
 	
 	@Query("{'name': ?0}")
-	public UserModel findByName(String name);
+	public UserDao findByName(String name);
 	
 	@Query("{'id': ?0}")
-	public UserModel findByIdUser(String id);
+	public UserDao findByIdUser(String id);
 	
 	@Query("{'email': ?0, 'password': ?1}")
-	public UserModel findByEmailPassword(String email, String password);
+	public UserDao findByEmailPassword(String email, String password);
 	
 	@Query("{'roles': ['ROLE_VENDOR']}")
-	public List<UserModel> findAllVendor();
+	public List<UserDao> findAllVendor();
+	
+	@Query("{'auditor.$id': ?0}")
+	public List<UserDao> findVendorByAuditor(ObjectId id);
 	
 }

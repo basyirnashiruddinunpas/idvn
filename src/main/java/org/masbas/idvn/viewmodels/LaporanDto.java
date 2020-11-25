@@ -3,9 +3,9 @@ package org.masbas.idvn.viewmodels;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import org.masbas.idvn.models.StatusVendorModel;
-import org.masbas.idvn.models.UserModel;
-import org.masbas.idvn.models.WorkaroundModel;
+import org.masbas.idvn.models.StatusVendorDao;
+import org.masbas.idvn.models.UserDao;
+import org.masbas.idvn.models.WorkaroundDao;
 import org.springframework.data.annotation.Id;
 
 public class LaporanDto {
@@ -16,15 +16,15 @@ public class LaporanDto {
 	private String productAffected;
 	private String description;
 	private String impact;
-	private List<WorkaroundModel> workarounds;
-	private List<StatusVendorModel> statusVendor;
-	private UserModel vendor;	
+	private List<WorkaroundDao> workarounds;
+	private List<StatusVendorDao> statusVendor;
+	private UserDao vendor;	
 	private String vendorStr;
 	private String references;
 	private String vectorString;
 	private String status;
-	private UserModel createdBy;
-	private UserModel editedBy;
+	private UserDao createdBy;
+	private UserDao editedBy;
 	private ZonedDateTime createdTimeStamp;
 	private ZonedDateTime updatedTimeStamp;
 	
@@ -58,22 +58,22 @@ public class LaporanDto {
 	public void setImpact(String impact) {
 		this.impact = impact;
 	}
-	public List<WorkaroundModel> getWorkarounds() {
+	public List<WorkaroundDao> getWorkarounds() {
 		return workarounds;
 	}
-	public void setWorkarounds(List<WorkaroundModel> workarounds) {
+	public void setWorkarounds(List<WorkaroundDao> workarounds) {
 		this.workarounds = workarounds;
 	}
-	public List<StatusVendorModel> getStatusVendor() {
+	public List<StatusVendorDao> getStatusVendor() {
 		return statusVendor;
 	}
-	public void setStatusVendor(List<StatusVendorModel> statusVendor) {
+	public void setStatusVendor(List<StatusVendorDao> statusVendor) {
 		this.statusVendor = statusVendor;
 	}
-	public UserModel getVendor() {
+	public UserDao getVendor() {
 		return vendor;
 	}
-	public void setVendor(UserModel vendor) {
+	public void setVendor(UserDao vendor) {
 		this.vendor = vendor;
 	}
 	public String getReferences() {
@@ -94,16 +94,16 @@ public class LaporanDto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public UserModel getCreatedBy() {
+	public UserDao getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(UserModel createdBy) {
+	public void setCreatedBy(UserDao createdBy) {
 		this.createdBy = createdBy;
 	}
-	public UserModel getEditedBy() {
+	public UserDao getEditedBy() {
 		return editedBy;
 	}
-	public void setEditedBy(UserModel editedBy) {
+	public void setEditedBy(UserDao editedBy) {
 		this.editedBy = editedBy;
 	}
 	public ZonedDateTime getCreatedTimeStamp() {

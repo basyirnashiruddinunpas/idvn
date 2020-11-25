@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.masbas.idvn.models.CurrentUser;
-import org.masbas.idvn.models.UserModel;
+import org.masbas.idvn.models.UserDao;
 import org.masbas.idvn.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,8 +21,8 @@ public class MyUserDetailService implements UserDetailsService {
       throws UsernameNotFoundException {
     	System.out.println("EMAIL: " + email);
     	System.out.println("BEGIN");
-        UserModel user = userRepository.findByEmail(email);
-        for (UserModel ele : userRepository.findAll()) {
+        UserDao user = userRepository.findByEmail(email);
+        for (UserDao ele : userRepository.findAll()) {
 			System.out.println(ele.getEmail());
 		}
         if (user == null) {

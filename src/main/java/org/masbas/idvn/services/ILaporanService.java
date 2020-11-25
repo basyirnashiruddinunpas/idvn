@@ -1,8 +1,8 @@
 package org.masbas.idvn.services;
 
-import org.masbas.idvn.models.LaporanModel;
+import org.masbas.idvn.models.LaporanDao;
 
 public interface ILaporanService {
-	public void save(LaporanModel user);
+	public void save(LaporanDao user);
 
 }

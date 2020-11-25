@@ -3,7 +3,7 @@ package org.masbas.idvn.viewmodels;
 import java.util.Date;
 import java.util.List;
 
-import org.masbas.idvn.models.UserModel;
+import org.masbas.idvn.models.UserDao;
 
 public class RegistrationDto {
 	
@@ -25,7 +25,7 @@ public class RegistrationDto {
 	
 	private int reputation;
 	
-	private List<UserModel> auditor;
+	private List<UserDao> auditor;
 	
 	private List<String> insidentHandler;
 	
@@ -85,10 +85,10 @@ public class RegistrationDto {
 	public void setReputation(int reputation) {
 		this.reputation = reputation;
 	}
-	public List<UserModel> getAuditor() {
+	public List<UserDao> getAuditor() {
 		return auditor;
 	}
-	public void setAuditor(List<UserModel> auditor) {
+	public void setAuditor(List<UserDao> auditor) {
 		this.auditor = auditor;
 	}
 	public List<String> getInsidentHandler() {

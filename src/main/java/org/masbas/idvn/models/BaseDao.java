@@ -4,18 +4,18 @@ import java.security.Timestamp;
 
 import org.springframework.data.annotation.Id;
 
-public class BaseModel {
+public class BaseDao {
 	@Id
 	protected String id;
 	protected Timestamp timestamp;
 	protected Timestamp updatedTimstamp;
 	protected String status;
 	
-	public BaseModel() {
+	public BaseDao() {
 		
 	}
 
-	public BaseModel(String id, Timestamp timestamp, Timestamp updatedTimstamp, String status) {
+	public BaseDao(String id, Timestamp timestamp, Timestamp updatedTimstamp, String status) {
 		super();
 		this.id = id;
 		this.timestamp = timestamp;

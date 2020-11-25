@@ -5,7 +5,7 @@ import javax.validation.Valid;
 
 import org.masbas.idvn.helpers.UserHelper;
 import org.masbas.idvn.helpers.exceptions.UserAlreadyExistException;
-import org.masbas.idvn.models.UserModel;
+import org.masbas.idvn.models.UserDao;
 import org.masbas.idvn.repositories.UserRepository;
 import org.masbas.idvn.services.LaporanService;
 import org.masbas.idvn.services.UserService;
@@ -95,7 +95,7 @@ public class WebController {
 		
 		try {
 			registrationDto.setTipeUser(UserHelper.TIPE_NOTIFIER);
-			UserModel registered = userService.registerNewUserAccount(registrationDto);
+			UserDao registered = userService.registerNewUserAccount(registrationDto);
 		} catch(UserAlreadyExistException uaex) {
 			return("redirect:/login?error=exist");
 		}

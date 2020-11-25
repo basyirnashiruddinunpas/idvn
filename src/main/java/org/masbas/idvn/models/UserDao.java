@@ -4,10 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
-public class UserModel {
+public class UserDao {
 	
 	@Id
 	private String id;
@@ -21,7 +22,9 @@ public class UserModel {
 	private String status;
 	private int reputation;
 	private String website;
-	private List<UserModel> auditor;
+	
+	@DBRef
+	private List<UserDao> auditor;
 	private List<String> insidentHandler;
 	
 	private Date createdTimeStamp;
@@ -87,10 +90,10 @@ public class UserModel {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	public List<UserModel> getAuditor() {
+	public List<UserDao> getAuditor() {
 		return auditor;
 	}
-	public void setAuditor(List<UserModel> auditor) {
+	public void setAuditor(List<UserDao> auditor) {
 		this.auditor = auditor;
 	}
 	public List<String> getInsidentHandler() {

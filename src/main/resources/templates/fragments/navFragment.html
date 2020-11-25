@@ -3,7 +3,7 @@
         <h1>IDVN</h1>
     </div>
     <nav class="navbar navbar-expand-lg navbar-info" style="background-color: #DCEDF6!important;">
-        <a class="navbar-brand text-dark" href="#">Home</a>
+        <a class="navbar-brand text-dark" th:href="@{/}">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,21 +17,24 @@
                         Daftar Kerentanan
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/kerentanan/terbaru">Kerentanan Terbaru</a>
-                        <a class="dropdown-item" href="/kerentanan/tracking">Tracking Kerentanan</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" th:href="@{/kerentanan/terbaru}">Kerentanan Terbaru</a>
+                        <a class="dropdown-item" th:href="@{/kerentanan/tracking}">Tracking Kerentanan</a>
+                        <a class="dropdown-item" th:href="@{/kerentanan/invalid}">Kerentanan Tidak Valid</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/kerentanan/lapor">Lapor</a>
+                    <a class="nav-link text-dark" th:href="@{/kerentanan/lapor}">Lapor</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
                 
-                    <a sec:authorize="isAnonymous()" class="nav-link" href="/login">Masuk</a>
-                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/logout">Keluar</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/kerentanan/my}">My IDVN( <p sec:authentication=="name" th:remove="tag"></p> )</a>
+                </li>
+                <li class="nav-item">
+                
+                    <a sec:authorize="isAnonymous()" class="nav-link" th:href="@{/login}">Masuk</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}">Keluar</a>
                 </li>
             </ul>
         </div>
