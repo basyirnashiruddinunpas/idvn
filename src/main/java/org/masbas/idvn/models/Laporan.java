@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "laporan")
-public class LaporanDao {
+public class Laporan {
 	
 	@Id
 	private String id;
@@ -18,18 +18,18 @@ public class LaporanDao {
 	private String productAffected;
 	private String description;
 	private String impact;
-	private List<WorkaroundDao> workarounds;
-	private List<StatusVendorDao> statusVendor;
+	private List<Workaround> workarounds;
+	private List<StatusVendor> statusVendor;
 	
 	@DBRef
-	private UserDao vendor;	
+	private User vendor;	
 	private String references;
 	private String vectorString;
 	private String status;
 	@DBRef
-	private UserDao createdBy;
+	private User createdBy;
 	@DBRef
-	private UserDao editedBy;
+	private User editedBy;
 	private Date createdTimeStamp;
 	private Date updatedTimeStamp;
 	
@@ -63,22 +63,22 @@ public class LaporanDao {
 	public void setImpact(String impact) {
 		this.impact = impact;
 	}
-	public List<WorkaroundDao> getWorkarounds() {
+	public List<Workaround> getWorkarounds() {
 		return workarounds;
 	}
-	public void setWorkarounds(List<WorkaroundDao> workarounds) {
+	public void setWorkarounds(List<Workaround> workarounds) {
 		this.workarounds = workarounds;
 	}
-	public List<StatusVendorDao> getStatusVendor() {
+	public List<StatusVendor> getStatusVendor() {
 		return statusVendor;
 	}
-	public void setStatusVendor(List<StatusVendorDao> statusVendor) {
+	public void setStatusVendor(List<StatusVendor> statusVendor) {
 		this.statusVendor = statusVendor;
 	}
-	public UserDao getVendor() {
+	public User getVendor() {
 		return vendor;
 	}
-	public void setVendor(UserDao vendor) {
+	public void setVendor(User vendor) {
 		this.vendor = vendor;
 	}
 	public String getReferences() {
@@ -99,16 +99,16 @@ public class LaporanDao {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public UserDao getCreatedBy() {
+	public User getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(UserDao createdBy) {
+	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
-	public UserDao getEditedBy() {
+	public User getEditedBy() {
 		return editedBy;
 	}
-	public void setEditedBy(UserDao editedBy) {
+	public void setEditedBy(User editedBy) {
 		this.editedBy = editedBy;
 	}
 	public Date getCreatedTimeStamp() {

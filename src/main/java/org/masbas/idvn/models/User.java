@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
-public class UserDao {
+public class User {
 	
 	@Id
 	private String id;
@@ -24,7 +24,7 @@ public class UserDao {
 	private String website;
 	
 	@DBRef
-	private List<UserDao> auditor;
+	private List<User> auditor;
 	private List<String> insidentHandler;
 	
 	private Date createdTimeStamp;
@@ -90,10 +90,10 @@ public class UserDao {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	public List<UserDao> getAuditor() {
+	public List<User> getAuditor() {
 		return auditor;
 	}
-	public void setAuditor(List<UserDao> auditor) {
+	public void setAuditor(List<User> auditor) {
 		this.auditor = auditor;
 	}
 	public List<String> getInsidentHandler() {

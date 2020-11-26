@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/headerFragment :: header" th:remove="tag"></div>
+    <link href="../static/css/base.css" rel="stylesheet" th:href="@{/css/base.css}" />
+</head>
+<body>
+	<div th:replace="/fragments/navFragment :: nav" th:remove="tag"></div>
+    <div class="container mt-lg-2">
+        <div class="row w-100">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/}">IDVN</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Invalid</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row border" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <h4 style="margin-top: 10px; margin-bottom: 30px;">Kerentanan Invalid</h4>
+            </div>
+            <div class="col">
+                <table class="table">
+                    <tbody>
+                        <tr th:each="laporan : ${page.getContent()}">
+                            <th style="width: 200px;" scope="row">
+                            	<a th:href="@{/kerentanan/show/}+${laporan.code}" class="text-secondary" th:text="${laporan.code}"></a>
+                            </th>
+                            <td>
+                            	<a th:href="@{/kerentanan/show/}+${laporan.code}" >
+                            		<span th:attr="class=${laporan.status=='PATCHED' ? 'badge badge-primary' : 'badge badge-secondary'}" th:text="${laporan.status}"></span>
+	                            	<p th:text="${laporan.overview}" th:remove="tag"></p> [
+	                            	<p th:text="${#dates.format(laporan.createdTimeStamp, 'dd MMMM yyyy, hh:mm')}" th:remove="tag"></p> ]
+	                            </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <div th:replace="/fragments/pagingFragment :: paging" th:remove="tag"></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
+
+</body>
+
+</html>

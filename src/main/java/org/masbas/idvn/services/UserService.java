@@ -6,10 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.masbas.idvn.helpers.UserHelper;
 import org.masbas.idvn.helpers.exceptions.UserAlreadyExistException;
-import org.masbas.idvn.models.LaporanDao;
-import org.masbas.idvn.models.UserDao;
+import org.masbas.idvn.models.Laporan;
+import org.masbas.idvn.models.User;
 import org.masbas.idvn.repositories.UserRepository;
 import org.masbas.idvn.viewmodels.RegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,11 @@ public class UserService implements IUserService {
 	private PasswordEncoder passwordEncoder;
 
 	@Transactional
-	public UserDao registerNewUserAccount(RegistrationDto registrationDto) throws UserAlreadyExistException {
+	public User registerNewUserAccount(RegistrationDto registrationDto) throws UserAlreadyExistException {
 		if(emailExist(registrationDto.getEmail())) {
 			throw new UserAlreadyExistException("Email sudah digunakan, " + registrationDto.getEmail());
 		}
-		UserDao user = new UserDao();
+		User user = new User();
 		user.setName(registrationDto.getName());
 		user.setEmail(registrationDto.getEmail());
 		user.setContact(registrationDto.getContact());
@@ -52,7 +53,7 @@ public class UserService implements IUserService {
 	}
 	
 	@Override
-	public UserDao loginUser(String email, String password) {
+	public User loginUser(String email, String password) {
 		return null;
 	}
 	
@@ -61,26 +62,30 @@ public class UserService implements IUserService {
     }
 
 	@Override
-	public UserDao getUserById(String id) {
+	public User getUserById(String id) {
 		return userRepository.findByIdUser(id);
 	}
-	
+
 	@Override
-	public UserDao getUserByEmail(String email) {
+	public User getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 	
+	public List<User> findVendorByAuditor(User user) {
+		return userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+	}
+	
 	@Override
-	public List<UserDao> findAllVendor() {
+	public List<User> findAllVendor() {
 		return userRepository.findAllVendor();
 	}
 	
 	public void setAuditor(String idVendor, String idAuditor) {
-		UserDao vendor = userRepository.findById(idVendor).get();
-		UserDao auditor = userRepository.findById(idAuditor).get();
-		List<UserDao> listVendor = vendor.getAuditor();
+		User vendor = userRepository.findById(idVendor).get();
+		User auditor = userRepository.findById(idAuditor).get();
+		List<User> listVendor = vendor.getAuditor();
 		if(listVendor == null) {
-			listVendor = new ArrayList<UserDao>();
+			listVendor = new ArrayList<User>();
 		}
 		listVendor.add(auditor);
 		vendor.setAuditor(listVendor);

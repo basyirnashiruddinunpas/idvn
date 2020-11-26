@@ -47,7 +47,7 @@ Usage:
     
 */
 
-var CVSS = function (id, def) {
+var CVSSView = function (id, def) {
     this.wId = id;
     this.def = def;
     var e = function (tag) {
@@ -248,7 +248,7 @@ var CVSS = function (id, def) {
     
 };
 
-CVSS.prototype.severityRatings = [{
+CVSSView.prototype.severityRatings = [{
     name: "None",
     bottom: 0.0,
     top: 0.0
@@ -270,7 +270,7 @@ CVSS.prototype.severityRatings = [{
     top: 10.0
 }];
 
-CVSS.prototype.severityRating = function (score) {
+CVSSView.prototype.severityRating = function (score) {
     var i;
     var severityRatingLength = this.severityRatings.length;
     for (i = 0; i < severityRatingLength; i++) {
@@ -285,7 +285,7 @@ CVSS.prototype.severityRating = function (score) {
     };
 };
 
-CVSS.prototype.valueofradio = function(e) {
+CVSSView.prototype.valueofradio = function(e) {
     for(var i = 0; i < e.length; i++) {
         if (e[i].checked) {
             return e[i].value;
@@ -294,7 +294,7 @@ CVSS.prototype.valueofradio = function(e) {
     return null;
 };
 
-CVSS.prototype.calculate = function () {
+CVSSView.prototype.calculate = function () {
     var cvssVersion = "3.0";
     var exploitabilityCoefficient = 8.22;
     var scopeCoefficient = 1.08;
@@ -398,14 +398,14 @@ CVSS.prototype.calculate = function () {
     }
 };
 
-CVSS.prototype.get = function() {
+CVSSView.prototype.get = function() {
     return {
         score: this.score.innerHTML,
         vector: this.vector.innerHTML
     };
 };
 
-CVSS.prototype.setMetric = function(a) {
+CVSSView.prototype.setMetric = function(a) {
     var vectorString = this.vector.innerHTML;
     if (/AV:.\/AC:.\/PR:.\/UI:.\/S:.\/C:.\/I:.\/A:./.test(vectorString)) {} else {
         vectorString = 'AV:_/AC:_/PR:_/UI:_/S:_/C:_/I:_/A:_';
@@ -415,7 +415,7 @@ CVSS.prototype.setMetric = function(a) {
     this.set(newVec);
 };
 
-CVSS.prototype.set = function(vec) {
+CVSSView.prototype.set = function(vec) {
     var newVec = 'CVSS:3.0/';
     var sep = '';
     for (var m in this.bm) {
@@ -439,7 +439,7 @@ CVSS.prototype.set = function(vec) {
     this.update(newVec);
 };
 
-CVSS.prototype.update = function(newVec) {
+CVSSView.prototype.update = function(newVec) {
     this.vector.innerHTML = newVec;
     var s = this.calculate();
     this.score.innerHTML = s;

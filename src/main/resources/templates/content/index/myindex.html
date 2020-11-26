@@ -16,6 +16,14 @@
                 </ol>
             </nav>
         </div>
+        <div th:if="${roles != 'ROLE_NOTIFIER'}" class="row border" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <h4 style="margin-top: 10px; margin-bottom: 10px;">Kelola Kerentanan</h4>
+					<ul>
+						<li th:each="vendor : ${vendors}" th:text="${vendor.name}"></li>
+					</ul>
+			</div>
+        </div>
         <div class="row border">
             <div class="col-md-12">
                 <h4 style="margin-top: 10px; margin-bottom: 30px;">Kerentanan Terbaru</h4>

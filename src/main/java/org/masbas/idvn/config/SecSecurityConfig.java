@@ -48,12 +48,16 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/").permitAll()
         .antMatchers("/js/*").permitAll()
         .antMatchers("/css/*").permitAll()
+        .antMatchers("/css/font/*").permitAll()
         .antMatchers("/img/*").permitAll()
         .antMatchers("/base*").permitAll()
         .antMatchers("/base/*").permitAll()
         .antMatchers("/home").permitAll()
         .antMatchers("/kerentanan*").permitAll()
         .antMatchers("/kerentanan/show/*").permitAll()
+        .antMatchers("/kerentanan/terbaru*").permitAll()
+        .antMatchers("/kerentanan/tracking*").permitAll()
+        .antMatchers("/kerentanan/invalid*").permitAll()
         .antMatchers("/kerentanan/lapor").hasRole(UserHelper.TIPE_NOTIFIER)
         .antMatchers("/kerentanan/save").hasRole(UserHelper.TIPE_NOTIFIER)
         .antMatchers("/kerentanan/my/terbaru").hasAnyRole(UserHelper.TIPE_NOTIFIER, UserHelper.TIPE_AUDITOR, UserHelper.TIPE_VENDOR)
@@ -61,9 +65,11 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/kerentanan/my/tracking").hasAnyRole(UserHelper.TIPE_NOTIFIER, UserHelper.TIPE_AUDITOR, UserHelper.TIPE_VENDOR)
         .antMatchers("/kerentanan/my/invalid").hasAnyRole(UserHelper.TIPE_NOTIFIER, UserHelper.TIPE_AUDITOR, UserHelper.TIPE_VENDOR)
         .antMatchers("/kerentanan/my/show/*").hasAnyRole(UserHelper.TIPE_NOTIFIER, UserHelper.TIPE_AUDITOR, UserHelper.TIPE_VENDOR)
+        .antMatchers("/kerentanan/my/update/**").hasAnyRole(UserHelper.TIPE_AUDITOR, UserHelper.TIPE_VENDOR)
         .antMatchers("/login*").permitAll()
         .antMatchers("/register*").permitAll()
         .antMatchers("/register/*").permitAll()
+        .antMatchers("/denied").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()
@@ -76,7 +82,10 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         .logout()
         .logoutUrl("/logout")
         .deleteCookies("JSESSIONID")
-        .logoutSuccessHandler(logoutSuccessHandler());;
+        .logoutSuccessHandler(logoutSuccessHandler())
+        .and()
+        .exceptionHandling()
+        .accessDeniedPage("/denied");
     }
     
     @Bean

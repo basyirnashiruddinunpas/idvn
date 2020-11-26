@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
-import org.masbas.idvn.models.LaporanDao;
-import org.masbas.idvn.models.UserDao;
+import org.masbas.idvn.models.Laporan;
+import org.masbas.idvn.models.User;
 import org.masbas.idvn.repositories.LaporanRepository;
 import org.masbas.idvn.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -24,19 +26,19 @@ public class LaporanService implements ILaporanService {
 	UserRepository userRepository;
 	
 	@Override
-	public void save(LaporanDao laporan) {
+	public void save(Laporan laporan) {
 		laporanRepository.save(laporan);
 	}
 	
-	public Optional<LaporanDao> findById(String id) {
+	public Optional<Laporan> findById(String id) {
 		return laporanRepository.findById(id);
 	}
 	
-	public LaporanDao findLatestLaporan() {
+	public Laporan findLatestLaporan() {
 		return laporanRepository.findLatestLaporan(Sort.by(Sort.Direction.DESC, "code")).get(0);
 	}
 	
-	public LaporanDao findByCode(String code) {
+	public Laporan findByCode(String code) {
 		return laporanRepository.findByCode(code);
 	}
 	
@@ -44,106 +46,188 @@ public class LaporanService implements ILaporanService {
 		return laporanRepository.findTotalKerentanan();
 	}
 
-	public List<LaporanDao> findLaporanPageable(Pageable pageable) {
+	public List<Laporan> findLaporanPageable(Pageable pageable) {
 		return laporanRepository.findLaporanPageable(pageable);
 	}
+
+	public Page<Laporan> findAllLaporanPageable(Pageable pageable) {
+		return laporanRepository.findAllLaporanPageable(pageable);
+	}
 	
-	public List<LaporanDao> findLaporanByStatusPageable(String status, Pageable pageable) {
+	public List<Laporan> findLaporanByStatusPageable(String status, Pageable pageable) {
 		return laporanRepository.findLaporanByStatusPageable(status, pageable);
 	}
 	
-	public List<LaporanDao> findLaporanTrackingPageable(Pageable pageable) {
+	public List<Laporan> findLaporanTrackingPageable(Pageable pageable) {
 		return laporanRepository.findLaporanTrackingPageable(pageable);
 	}
+	
+	public Page<Laporan> findAllLaporanTrackingPageable(Pageable pageable) {
+		return laporanRepository.findAllLaporanTrackingPageable(pageable);
+	}
 
-	public List<LaporanDao> findLaporanPageableCurrUser(UserDao user, Pageable pageable) {
+	public Page<Laporan> findAllLaporanInvalidPageable(Pageable pageable) {
+		return laporanRepository.findAllLaporanInvalidPageable(pageable);
+	}
+
+	public List<Laporan> findLaporanPageableCurrUser(User user, Pageable pageable) {
 		return laporanRepository.findLaporanPageableCurrUser(new ObjectId(user.getId()), pageable);
 	}
 
-	public List<LaporanDao> findLaporanByStatusPageableCurrUser(String status, UserDao user, Pageable pageable) {
+	public Page<Laporan> findAllLaporanPageableCurrUser(User user, Pageable pageable) {
+		return laporanRepository.findAllLaporanPageableCurrUser(new ObjectId(user.getId()), pageable);
+	}
+
+	public List<Laporan> findLaporanByStatusPageableCurrUser(String status, User user, Pageable pageable) {
 		return laporanRepository.findLaporanByStatusPageableCurrUser(status, new ObjectId(user.getId()), pageable);
 	}
 	
-	public List<LaporanDao> findLaporanTrackingPageableCurrUser(UserDao user, Pageable pageable) {
+	public List<Laporan> findLaporanTrackingPageableCurrUser(User user, Pageable pageable) {
 		return laporanRepository.findLaporanTrackingPageableCurrUser(new ObjectId(user.getId()), pageable);
 	}
 	
-	public List<LaporanDao> findLaporanInvalidPageableCurrUser(UserDao user, Pageable pageable) {
-		;
+	public Page<Laporan> findAllLaporanTrackingPageableCurrUser(User user, Pageable pageable) {
+		return laporanRepository.findAllLaporanTrackingPageableCurrUser(new ObjectId(user.getId()), pageable);
+	}
+	
+	public List<Laporan> findLaporanInvalidPageableCurrUser(User user, Pageable pageable) {
 		return laporanRepository.findLaporanInvalidPageableCurrUser(new ObjectId(user.getId()), pageable);
+	}
+	
+	public Page<Laporan> findAllLaporanInvalidPageableCurrUser(User user, Pageable pageable) {
+		return laporanRepository.findAllLaporanInvalidPageableCurrUser(new ObjectId(user.getId()), pageable);
 	}
 	
 	// VENDOR
 
-	public List<LaporanDao> findLaporanPageableVendor(UserDao user, Pageable pageable) {
+	public List<Laporan> findLaporanPageableVendor(User user, Pageable pageable) {
 		return laporanRepository.findLaporanPageableVendor(new ObjectId(user.getId()), pageable);
 	}
 
-	public List<LaporanDao> findLaporanByStatusPageableVendor(String status, UserDao user, Pageable pageable) {
+	public Page<Laporan> findAllLaporanPageableVendor(User user, Pageable pageable) {
+		return laporanRepository.findAllLaporanPageableVendor(new ObjectId(user.getId()), pageable);
+	}
+
+	public List<Laporan> findLaporanByStatusPageableVendor(String status, User user, Pageable pageable) {
 		return laporanRepository.findLaporanByStatusPageableVendor(status, new ObjectId(user.getId()), pageable);
 	}
 	
-	public List<LaporanDao> findLaporanTrackingPageableVendor(UserDao user, Pageable pageable) {
+	public List<Laporan> findLaporanTrackingPageableVendor(User user, Pageable pageable) {
 		return laporanRepository.findLaporanTrackingPageableVendor(new ObjectId(user.getId()), pageable);
 	}
 	
-	public List<LaporanDao> findLaporanInvalidPageableVendor(UserDao user, Pageable pageable) {
-		;
+	public Page<Laporan> findAllLaporanTrackingPageableVendor(User user, Pageable pageable) {
+		return laporanRepository.findAllLaporanTrackingPageableVendor(new ObjectId(user.getId()), pageable);
+	}
+	
+	public List<Laporan> findLaporanInvalidPageableVendor(User user, Pageable pageable) {
 		return laporanRepository.findLaporanInvalidPageableVendor(new ObjectId(user.getId()), pageable);
+	}
+	
+	public Page<Laporan> findAllLaporanInvalidPageableVendor(User user, Pageable pageable) {
+		return laporanRepository.findAllLaporanInvalidPageableVendor(new ObjectId(user.getId()), pageable);
 	}
 	
 	// AUDITOR
 
-	public List<LaporanDao> findLaporanPageableAuditor(UserDao user, Pageable pageable) {
-		List<UserDao> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
-		List<LaporanDao> laporans = new ArrayList<LaporanDao>();
+	public List<Laporan> findLaporanPageableAuditor(User user, Pageable pageable) {
+		List<User> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+		List<Laporan> laporans = new ArrayList<Laporan>();
 		
-		for (UserDao vendor : vendors) {
-			List<LaporanDao> lapors = laporanRepository.findLaporanPageableAuditor(new ObjectId(vendor.getId()), pageable);
-			for (LaporanDao lapor : lapors) {
+		for (User vendor : vendors) {
+			List<Laporan> lapors = laporanRepository.findLaporanPageableAuditor(new ObjectId(vendor.getId()), pageable);
+			for (Laporan lapor : lapors) {
 				laporans.add(lapor);
 			}
 		}
 		return laporans;
 	}
 
-	public List<LaporanDao> findLaporanByStatusPageableAuditor(String status, UserDao user, Pageable pageable) {
-		List<UserDao> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
-		List<LaporanDao> laporans = new ArrayList<LaporanDao>();
+	public Page<Laporan> findAllLaporanPageableAuditor(User user, Pageable pageable) {
+		List<User> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+		List<Laporan> laporans = new ArrayList<Laporan>();
+		for (User vendor : vendors) {
+			List<Laporan> lapors = laporanRepository.findAllLaporanPageableAuditor(new ObjectId(vendor.getId()), pageable).getContent();
+			for (Laporan lapor : lapors) {
+				laporans.add(lapor);
+			}
+		}
+		Page<Laporan> pager = new PageImpl<Laporan>(
+				laporans.subList((int) pageable.getOffset(), 
+						(int)((pageable.getPageSize() + pageable.getOffset()) > laporans.size() ? laporans.size() : (pageable.getPageSize() + pageable.getOffset()))
+								), pageable, laporans.size());
+		return pager;
+	}
+
+	public List<Laporan> findLaporanByStatusPageableAuditor(String status, User user, Pageable pageable) {
+		List<User> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+		List<Laporan> laporans = new ArrayList<Laporan>();
 		
-		for (UserDao vendor : vendors) {
-			List<LaporanDao> lapors = laporanRepository.findLaporanByStatusPageableAuditor(status, new ObjectId(vendor.getId()), pageable);
-			for (LaporanDao lapor : lapors) {
+		for (User vendor : vendors) {
+			List<Laporan> lapors = laporanRepository.findLaporanByStatusPageableAuditor(status, new ObjectId(vendor.getId()), pageable);
+			for (Laporan lapor : lapors) {
 				laporans.add(lapor);
 			}
 		}
 		return laporans;
 	}
 	
-	public List<LaporanDao> findLaporanTrackingPageableAuditor(UserDao user, Pageable pageable) {
-		List<UserDao> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
-		List<LaporanDao> laporans = new ArrayList<LaporanDao>();
+	public List<Laporan> findLaporanTrackingPageableAuditor(User user, Pageable pageable) {
+		List<User> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+		List<Laporan> laporans = new ArrayList<Laporan>();
 		
-		for (UserDao vendor : vendors) {
-			List<LaporanDao> lapors =  laporanRepository.findLaporanTrackingPageableAuditor(new ObjectId(vendor.getId()), pageable);
-			for (LaporanDao lapor : lapors) {
+		for (User vendor : vendors) {
+			List<Laporan> lapors =  laporanRepository.findLaporanTrackingPageableAuditor(new ObjectId(vendor.getId()), pageable);
+			for (Laporan lapor : lapors) {
 				laporans.add(lapor);
 			}
 		}
 		return laporans;
 	}
+
+	public Page<Laporan> findAllLaporanTrackingPageableAuditor(User user, Pageable pageable) {
+		List<User> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+		List<Laporan> laporans = new ArrayList<Laporan>();
+		for (User vendor : vendors) {
+			List<Laporan> lapors = laporanRepository.findAllLaporanTrackingPageableAuditor(new ObjectId(vendor.getId()), pageable).getContent();
+			for (Laporan lapor : lapors) {
+				laporans.add(lapor);
+			}
+		}
+		Page<Laporan> pager = new PageImpl<Laporan>(
+				laporans.subList((int) pageable.getOffset(), 
+						(int)((pageable.getPageSize() + pageable.getOffset()) > laporans.size() ? laporans.size() : (pageable.getPageSize() + pageable.getOffset()))
+								), pageable, laporans.size());
+		return pager;
+	}
 	
-	public List<LaporanDao> findLaporanInvalidPageableAuditor(UserDao user, Pageable pageable) {
-		List<UserDao> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
-		List<LaporanDao> laporans = new ArrayList<LaporanDao>();
+	public List<Laporan> findLaporanInvalidPageableAuditor(User user, Pageable pageable) {
+		List<User> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+		List<Laporan> laporans = new ArrayList<Laporan>();
 		
-		for (UserDao vendor : vendors) {
-			List<LaporanDao> lapors = laporanRepository.findLaporanInvalidPageableAuditor(new ObjectId(vendor.getId()), pageable);
-			for (LaporanDao lapor : lapors) {
+		for (User vendor : vendors) {
+			List<Laporan> lapors = laporanRepository.findLaporanInvalidPageableAuditor(new ObjectId(vendor.getId()), pageable);
+			for (Laporan lapor : lapors) {
 				laporans.add(lapor);
 			}
 		}
 		return laporans;
+	}
+
+	public Page<Laporan> findAllLaporanInvalidPageableAuditor(User user, Pageable pageable) {
+		List<User> vendors = userRepository.findVendorByAuditor(new ObjectId(user.getId()));
+		List<Laporan> laporans = new ArrayList<Laporan>();
+		for (User vendor : vendors) {
+			List<Laporan> lapors = laporanRepository.findAllLaporanInvalidPageableAuditor(new ObjectId(vendor.getId()), pageable).getContent();
+			for (Laporan lapor : lapors) {
+				laporans.add(lapor);
+			}
+		}
+		Page<Laporan> pager = new PageImpl<Laporan>(
+				laporans.subList((int) pageable.getOffset(), 
+						(int)((pageable.getPageSize() + pageable.getOffset()) > laporans.size() ? laporans.size() : (pageable.getPageSize() + pageable.getOffset()))
+								), pageable, laporans.size());
+		return pager;
 	}
 
 }

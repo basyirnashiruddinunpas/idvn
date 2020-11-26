@@ -2,20 +2,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico" />
-
-    <title>Navbar Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <div th:replace="/fragments/headerFragment :: header" th:remove="tag"></div>
     <link href="../static/css/base.css" rel="stylesheet" th:href="@{/css/base.css}" />
-    <link href="../static/css/cvss.css" rel="stylesheet" th:href="@{/css/cvssView.css}" />
+    <link href="../static/css/cvssView.css" rel="stylesheet" th:href="@{/css/cvssView.css}" />
     <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 </head>
 
@@ -128,7 +117,7 @@
         </div>
     </div>
     <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
-    <script src="../static/js/cvss.js" th:src="@{/js/cvssView.js}"></script>
+    <script src="../static/js/cvssView.js" th:src="@{/js/cvssView.js}"></script>
 
     <script>
         var c = new CVSS("cvssboard", );

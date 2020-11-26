@@ -1,7 +1,7 @@
 package org.masbas.idvn.viewmodels;
 
-import org.masbas.idvn.models.UserDao;
+import org.masbas.idvn.models.User;
 
-public class UserDto extends UserDao {
+public class UserDto extends User {
 
 }

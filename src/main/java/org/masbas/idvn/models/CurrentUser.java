@@ -3,9 +3,8 @@ package org.masbas.idvn.models;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 
-public class CurrentUser extends User {
+public class CurrentUser extends org.springframework.security.core.userdetails.User {
 
 	public CurrentUser(String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
@@ -14,15 +13,15 @@ public class CurrentUser extends User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public UserDao getUserModel() {
+	public User getUserModel() {
 		return userModel;
 	}
 
-	public void setUserModel(UserDao userModel) {
+	public void setUserModel(User userModel) {
 		this.userModel = userModel;
 	}
 
-	private UserDao userModel;
+	private User userModel;
 	
 
 }

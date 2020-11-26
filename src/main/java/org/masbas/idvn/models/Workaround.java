@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "workaround")
-public class WorkaroundDao {
+public class Workaround {
 	@Id
 	private String id;
 	private String solution;

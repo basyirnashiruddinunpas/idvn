@@ -1,0 +1,24 @@
+<th:block th:fragment="paging">
+				    <ul class="pagination pagination-centered justify-content-center">
+				      <li th:attr="class=${page.isFirstPage}? 'disabled' : '' + ' page-item'">
+				        <a th:if='${page.isFirstPage}' href='#' class="page-link">← First</a>
+				        <a th:if='${not page.isFirstPage}' th:href='@{${page.url}(page=1,size=${page.size})}' class="page-link">← First</a>
+				      </li>
+				      <li th:attr="class=${page.hasPreviousPage}? '' : 'disabled' + ' page-item'">
+				        <a th:if='${not page.hasPreviousPage}' href='#' title='' class="page-link">«</a>
+				        <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-1},size=${page.size})}' title='Go to previous page' class="page-link">«</a>
+				      </li>
+				      <li th:each='item : ${page.items}' th:attr="class=${item.current}? 'active' : '' + ' page-item'">
+				        <a th:if='${item.current}' href='#' class="page-link"><span th:text='${item.number}'>1</span></a>
+				        <a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number},size=${page.size})}' class="page-link"><span th:text='${item.number}'>1</span></a>
+				      </li>
+				      <li th:attr="class=${page.hasNextPage}? '' : 'disabled' + ' page-item'">
+				        <a th:if='${not page.hasNextPage}' href='#' title='' class="page-link">»</a>
+				        <a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number+1},size=${page.size})}' title='Go to next page' class="page-link">»</a>
+				      </li>
+				      <li th:attr="class=${page.lastPage}? 'disabled' : '' + ' page-item'">
+				        <a th:if='${page.lastPage}' href='#' class="page-link">Last →</a>
+				        <a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages},size=${page.size})}' class="page-link">Last →</a>
+				      </li>
+				    </ul>
+</th>
