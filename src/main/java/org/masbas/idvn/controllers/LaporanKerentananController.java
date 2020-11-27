@@ -12,10 +12,16 @@ import org.masbas.idvn.helpers.PageWrapper;
 import org.masbas.idvn.helpers.StatusHelper;
 import org.masbas.idvn.helpers.UserHelper;
 import org.masbas.idvn.models.Laporan;
+import org.masbas.idvn.models.Patch;
+import org.masbas.idvn.models.StatusVendor;
 import org.masbas.idvn.models.User;
+import org.masbas.idvn.models.Workaround;
 import org.masbas.idvn.services.LaporanService;
 import org.masbas.idvn.services.UserService;
 import org.masbas.idvn.viewmodels.LaporanDto;
+import org.masbas.idvn.viewmodels.PatchDto;
+import org.masbas.idvn.viewmodels.StatusVendorDto;
+import org.masbas.idvn.viewmodels.WorkaroundDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageRequest;
@@ -232,29 +238,149 @@ public class LaporanKerentananController {
 		return "redirect:/kerentanan/show/" + laporan.getCode();
 	}
 	
+	@PostMapping("/kerentanan/my/update/verify")
+	public String setVerify(@ModelAttribute StatusVendorDto statusVendor) {
+		Laporan laporan = laporanService.findById(statusVendor.getId()).get();
+		StatusVendor status = new StatusVendor();
+		List<StatusVendor> lsStatus = new ArrayList<StatusVendor>();
+		status.setCatatanVendor(statusVendor.getCatatanVendor());
+		status.setStatusVendor(statusVendor.getStatusVendor());
+		status.setCreatedTimestamp(new Date());
+		status.setUpdatedTimestamp(new Date());
+		lsStatus.add(status);
+		laporan.setStatusVendor(lsStatus);
+		laporan.setStatus(StatusHelper.STATUS_PROCESSED);
+		laporanService.save(laporan);
+		
+		
+		return "redirect:/kerentanan/my/show/" + laporan.getCode();
+	}
+	
+	@RequestMapping("/kerentanan/my/update/invalid/{code}")
+	public String setInvalid(@PathVariable String code) {
+		Laporan laporan = laporanService.findById(code).get();
+		laporan.setStatus(StatusHelper.STATUS_NOT_VALID);
+		laporanService.save(laporan);
+		return "redirect:/kerentanan/my/show/" + laporan.getCode();
+	}
+	
+	@PostMapping("/kerentanan/my/update/addstatus")
+	public String addStatus(@ModelAttribute StatusVendorDto statusVendor) {
+		Laporan laporan = laporanService.findById(statusVendor.getId()).get();
+		StatusVendor status = new StatusVendor();
+		List<StatusVendor> lsStatus = laporan.getStatusVendor();
+		status.setCatatanVendor(statusVendor.getCatatanVendor());
+		status.setStatusVendor(statusVendor.getStatusVendor());
+		status.setCreatedTimestamp(new Date());
+		status.setUpdatedTimestamp(new Date());
+		lsStatus.add(status);
+		laporan.setStatusVendor(lsStatus);
+		laporanService.save(laporan);
+		
+		
+		return "redirect:/kerentanan/my/show/" + laporan.getCode();
+	}
+	
+	@PostMapping("/kerentanan/my/update/addworkaround")
+	public String addWorkaround(@ModelAttribute WorkaroundDto workaroundDto) {
+		Laporan laporan = laporanService.findById(workaroundDto.getId()).get();
+		Workaround workaround = new Workaround();
+		List<Workaround> lsWorkaround = laporan.getWorkarounds();
+		if(lsWorkaround==null)
+			lsWorkaround = new ArrayList<Workaround>();
+		
+		workaround.setSolution(workaroundDto.getSolution());
+		workaround.setCreatedTimestamp(new Date());
+		workaround.setUpdatedTimestamp(new Date());
+		lsWorkaround.add(workaround);
+		laporan.setWorkarounds(lsWorkaround);
+		laporanService.save(laporan);
+		
+		
+		return "redirect:/kerentanan/my/show/" + laporan.getCode();
+	}
+	
+	@PostMapping("/kerentanan/my/update/addpatch")
+	public String addPatch(@ModelAttribute PatchDto patchDto) {
+		Laporan laporan = laporanService.findById(patchDto.getId()).get();
+		Patch patch = new Patch();
+		
+		patch.setCatatanPatch(patchDto.getCatatanPatch());
+		patch.setUrlPatch(patchDto.getUrlPatch());
+		patch.setCreatedTimestamp(new Date());
+		patch.setUpdatedTimestamp(new Date());
+		laporan.setStatus(StatusHelper.STATUS_PATCHED);
+		laporan.setPatch(patch);
+		laporanService.save(laporan);
+		
+		
+		return "redirect:/kerentanan/my/show/" + laporan.getCode();
+	}
+	
+	@RequestMapping("/kerentanan/my/update/archive/{code}")
+	public String setArchived(@PathVariable String code) {
+		Laporan laporan = laporanService.findById(code).get();
+		laporan.setStatus(StatusHelper.STATUS_ARCHIVED);
+		laporanService.save(laporan);
+		return "redirect:/kerentanan/my/show/" + laporan.getCode();
+	}
+	
+	@PostMapping("/kerentanan/my/update/save")
+	public String update(@ModelAttribute LaporanDto laporanDto) {
+		Laporan laporan = laporanService.findById(laporanDto.getId()).get();
+		laporan.setOverview(laporanDto.getOverview());
+		laporan.setProductAffected(laporanDto.getProductAffected());
+		laporan.setReferences(laporanDto.getReferences());
+		laporan.setDescription(laporanDto.getDescription());
+		laporan.setImpact(laporanDto.getImpact());
+		laporan.setVectorString(laporanDto.getVectorString());
+		String email = CurrentUserHelper.GetLoggedUserName();
+		if(email!="") {
+			laporan.setEditedBy(userService.getUserByEmail(email));
+		}
+		laporan.setUpdatedTimeStamp(new Date());
+		laporanService.save(laporan);
+		
+		return "redirect:/kerentanan/my/show/" + laporan.getCode();
+	}
+	
 	@RequestMapping("/kerentanan/show/{code}")
 	public String show(@PathVariable String code, Model model) {
 		Laporan laporan = laporanService.findByCode(code);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yy, hh:mm", Locale.US);
 		String date = dateFormat.format(laporan.getCreatedTimeStamp());
+		String dateEdit = "";
+		if(laporan.getEditedBy() != null) {
+			dateEdit = dateFormat.format(laporan.getUpdatedTimeStamp());
+		}
+				
 		
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("laporan", laporan);
 		model.addAttribute("judul", laporan.getOverview() + " [" + date + "]");
 		model.addAttribute("date", date);
+		model.addAttribute("dateEdit", dateEdit);
 		return "content/pelaporan/show";
 	}
 	
 	@RequestMapping("/kerentanan/my/show/{code}")
 	public String showMy(@PathVariable String code, Model model) {
 		Laporan laporan = laporanService.findByCode(code);
+		if(!checkHasAccess(laporan)) {
+			return "redirect:/kerentanan/my/";
+		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yy, hh:mm", Locale.US);
 		String date = dateFormat.format(laporan.getCreatedTimeStamp());
+		String dateEdit = "";
+		if(laporan.getEditedBy() != null) {
+			dateEdit = dateFormat.format(laporan.getUpdatedTimeStamp());
+		}
 		
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("laporan", laporan);
 		model.addAttribute("judul", laporan.getOverview() + " [" + date + "]");
 		model.addAttribute("date", date);
+		model.addAttribute("dateEdit", dateEdit);
 		model.addAttribute("vendors", userService.findAllVendor());
 		return "content/pelaporan/kelola";
 	}
@@ -271,6 +397,21 @@ public class LaporanKerentananController {
 	private List<User> getListVendor() {
 		User user = getCurrentUser();
 		return userService.findVendorByAuditor(user);
+	}
+	
+	private boolean checkHasAccess(Laporan laporan) {
+		User user = getCurrentUser();
+		// CEK APAKAH VENDOR
+		if(laporan.getVendor().getId().equals(user.getId())) 
+			return true;
+		// CEK APAKAH AUDITOR
+		if(laporan.getVendor().getAuditor()!=null) {
+			for (User usr : laporan.getVendor().getAuditor())
+				if(usr.getId().equals(usr.getId()))
+					return true;
+		}
+		
+		return false;
 	}
 	
 }

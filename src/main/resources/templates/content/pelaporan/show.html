@@ -51,38 +51,51 @@
                     </p>
                 </div>
                 <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+                    <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
                         <strong class="d-block text-gray-dark">Workaround</strong>
                         <ul>
-                        	<li th:each="workaround : ${laporan.workarounds}" th:text="${workaround.solution}"></li>
+                        	<li class="urlable" th:each="workaround : ${laporan.workarounds}" th:text="${workaround.solution}"></li>
                         </ul>
-                    </p>
+                    </div>
+                </div>
+                <div th:if="${laporan.status == 'PATCHED'}" class="media text-muted pt-3">
+                    <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+                        <strong class="d-block text-gray-dark">Patch Kerentanan</strong>
+                        <ul>
+                        	<li class="urlable" th:text="${laporan.patch.catatanPatch}"></li>
+                        	<li class="urlable" th:text="${laporan.patch.urlPatch}"></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+                    <p class="media-body pb-3 mb-0 lh-125 text-dark">
                         <strong class="d-block text-gray-dark">Vendor Status</strong>
 
                     </p>
                 </div>
-                <table class="table table-striped border">
-                    <thead>
-                        <tr class="thead-dark">
-                            <th scope="col">Vendor</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Update Status</th>
-                            <th scope="col">Catatan Vendor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="statusVendor : ${laporan.statusVendor}">
-                            <th scope="row" style="width: 200px;" th:text="${laporan.vendor.name}"></th>
-                            <td th:text="${statusVendor.statusVendor}"></td>
-                            <td th:text="${#dates.format(statusVendor.createdTimestamp, 'yyyy/MM/dd')}"></td>
-                            <td th:text="${statusVendor.catatanVendor}" style="width: 600px;"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <p th:if="${laporan.statusVendor == null}">
+                	Belum ada status penanganan kerentanan dari Vendor
+                </p>
+                <div th:if="${laporan.statusVendor != null}" th:remove="tag">
+	                <table class="table table-striped border">
+	                    <thead>
+	                        <tr class="thead-dark">
+	                            <th scope="col">Vendor</th>
+	                            <th scope="col">Status</th>
+	                            <th scope="col">Update Status</th>
+	                            <th scope="col">Catatan Vendor</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr th:each="statusVendor : ${laporan.statusVendor}">
+	                            <th scope="row" style="width: 200px;" th:text="${laporan.vendor.name}"></th>
+	                            <td th:text="${statusVendor.statusVendor}"></td>
+	                            <td th:text="${#dates.format(statusVendor.createdTimestamp, 'yyyy/MM/dd')}"></td>
+	                            <td class="urlable" th:text="${statusVendor.catatanVendor}" style="width: 600px;"></td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+				</div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
                     </p>
@@ -109,7 +122,8 @@
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
                         <strong class="d-block text-gray-dark">Credit</strong>
-                         <p th:text="${laporan.createdBy.name}" th:remove="tag"></p> melaporkan kerentanan kepada IDVN pada <p th:text="${date}" th:remove="tag">
+                         <p th:text="${laporan.createdBy.name}" th:remove="tag"></p> melaporkan kerentanan kepada IDVN pada <p th:text="${date}" th:remove="tag"> </p><br>
+                         <p th:if="${laporan.editedBy != null}" th:text="${laporan.editedBy.name}" th:remove="tag"> </p><p th:if="${dateEdit != ''}" th:text="' melakukan perubahan detail kerentanan kepada IDVN pada ' + ${dateEdit}" th:remove="tag"><br>
                     </p>
                 </div>
                 <!-- End Content Isi -->
@@ -118,9 +132,10 @@
     </div>
     <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
     <script src="../static/js/cvssView.js" th:src="@{/js/cvssView.js}"></script>
+    <script src="../static/js/base.js" th:src="@{/js/base.js}"></script>
 
     <script>
-        var c = new CVSS("cvssboard", );
+        var c = new CVSSView("cvssboard", );
         c.set(document.getElementById("cvss-v3-vector-string").textContent);
     </script>
     <!-- /container -->

@@ -20,6 +20,7 @@ public class Laporan {
 	private String impact;
 	private List<Workaround> workarounds;
 	private List<StatusVendor> statusVendor;
+	private Patch patch;
 	
 	@DBRef
 	private User vendor;	
@@ -128,6 +129,12 @@ public class Laporan {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public Patch getPatch() {
+		return patch;
+	}
+	public void setPatch(Patch patch) {
+		this.patch = patch;
 	}
 	
 	

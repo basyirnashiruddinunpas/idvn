@@ -53,43 +53,55 @@
                     </p>
                 </div>
                 <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+                    <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
                         <strong class="d-block text-gray-dark">Workaround</strong>
                         <ul>
-                        	<li th:each="workaround : ${laporan.workarounds}" th:text="${workaround.solution}"></li>
+                        	<li class="urlable" th:each="workaround : ${laporan.workarounds}" th:text="${workaround.solution}"></li>
                         </ul>
-                    </p>
+                    </div>
+                </div>
+                <div th:if="${laporan.status == 'PATCHED'}" class="media text-muted pt-3">
+                    <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+                        <strong class="d-block text-gray-dark">Patch Kerentanan</strong>
+                        <ul>
+                        	<li class="urlable" th:text="${laporan.patch.catatanPatch}"></li>
+                        	<li class="urlable" th:text="${laporan.patch.urlPatch}"></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+                    <p class="media-body pb-3 mb-0 lh-125 text-dark">
                         <strong class="d-block text-gray-dark">Vendor Status</strong>
 
                     </p>
                 </div>
-                <table class="table table-striped border">
-                    <thead>
-                        <tr class="thead-dark">
-                            <th scope="col">Vendor</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Update Status</th>
-                            <th scope="col">Catatan Vendor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="statusVendor : ${laporan.statusVendor}">
-                            <th scope="row" style="width: 200px;" th:text="${laporan.vendor.name}"></th>
-                            <td th:text="${statusVendor.statusVendor}"></td>
-                            <td th:text="${#dates.format(statusVendor.createdTimestamp, 'yyyy/MM/dd')}"></td>
-                            <td th:text="${statusVendor.catatanVendor}" style="width: 600px;"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <p th:if="${laporan.statusVendor == null}">
+                	Belum ada status penanganan kerentanan dari Vendor
+                </p>
+                <div th:if="${laporan.statusVendor != null}" th:remove="tag">
+	                <table class="table table-striped border">
+	                    <thead>
+	                        <tr class="thead-dark">
+	                            <th scope="col">Vendor</th>
+	                            <th scope="col">Status</th>
+	                            <th scope="col">Update Status</th>
+	                            <th scope="col">Catatan Vendor</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr th:each="statusVendor : ${laporan.statusVendor}">
+	                            <th scope="row" style="width: 200px;" th:text="${laporan.vendor.name}"></th>
+	                            <td th:text="${statusVendor.statusVendor}"></td>
+	                            <td th:text="${#dates.format(statusVendor.createdTimestamp, 'yyyy/MM/dd')}"></td>
+	                            <td class="urlable" th:text="${statusVendor.catatanVendor}" style="width: 600px;"></td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+				</div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
                     </p>
                 </div>
-
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
                         <strong class="d-block text-gray-dark">References</strong>
@@ -111,7 +123,8 @@
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
                         <strong class="d-block text-gray-dark">Credit</strong>
-                         <p th:text="${laporan.createdBy.name}" th:remove="tag"></p> melaporkan kerentanan kepada IDVN pada <p th:text="${date}" th:remove="tag">
+                         <p th:text="${laporan.createdBy.name}" th:remove="tag"></p> melaporkan kerentanan kepada IDVN pada <p th:text="${date}" th:remove="tag"> </p><br>
+                         <p th:if="${laporan.editedBy != null}" th:text="${laporan.editedBy.name}" th:remove="tag"> </p><p th:if="${dateEdit != ''}" th:text="' melakukan perubahan detail kerentanan kepada IDVN pada ' + ${dateEdit}" th:remove="tag"><br>
                     </p>
                 </div>
                 <!-- End Content Isi -->
@@ -129,12 +142,12 @@
             	<div class="col">
                     <div class="form-group">
                         <label for="overview">Status Pemeriksaan Kerentanan</label>
-                        <input type="text" class="form-control" name="status" id="status"
+                        <input type="text" class="form-control" name="statusVendor" id="statusVendor"
                             placeholder="Status pemeriksaan">
                     </div>
                     <div class="form-group">
                         <label for="description">Catatan Pemeriksaan Kerentanan</label>
-                        <textarea class="form-control summernote" id="catatan" name="catatan" rows="4"></textarea>
+                        <textarea class="form-control summernote" id="catatanVendor" name="catatanVendor" rows="4"></textarea>
                     </div>
                 </div>
             </div>
@@ -142,7 +155,9 @@
                 <div class="col-md-12">
                     <div class="d-flex flex-row-reverse" style="margin-top: 10px;">
                         <button type="button" class="btn btn-primary m-2 pull-right" id="verifikasiBtn" data-toggle="modal"
-                            data-target="#verifyModal">&nbsp;&nbsp;VERIFIKASI&nbsp;&nbsp;</button>
+                            data-target="#verifyModal">&nbsp;&nbsp;Verifikasi Valid&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger m-2 pull-right" id="invalidBtn" data-toggle="modal"
+                            data-target="#invalidModal">&nbsp;&nbsp;Verifikasi Tidak Valid&nbsp;&nbsp;</button>
                     </div>
                 </div>
             </div>
@@ -153,14 +168,14 @@
 	
 	                    <!-- Modal Header -->
 	                    <div class="modal-header">
-	                        <h4 class="modal-title">Verifikasi Laporan</h4>
+	                        <h4 class="modal-title">Verifikasi Laporan Valid</h4>
 	                        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	                    </div>
 	
 	                    <!-- Modal body -->
 	                    <div class="modal-body">
-	                        Apakah semua yang anda masukan benar dan dapat dipertanggung jawabkan baik secara praktik maupun
-	                        secara hukum?
+	                    	Anda menyatakan laporan ini valid, atau terjadi pada perangkat yang dilaporkan.<br>
+	                    	Apa anda yakin akan merubah status laporan ini menjadi valid?
 	                    </div>
 	
 	                    <!-- Modal footer -->
@@ -173,10 +188,39 @@
 	            </div>
 	        </div>
 	        <!-- END MODAL -->
+            <!-- MODAL -->
+	        <div class="modal fade" id="invalidModal">
+	            <div class="modal-dialog">
+	                <div class="modal-content">
+	
+	                    <!-- Modal Header -->
+	                    <div class="modal-header">
+	                        <h4 class="modal-title">Verifikasi Laporan Tidak Valid</h4>
+	                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                    </div>
+	
+	                    <!-- Modal body -->
+	                    <div class="modal-body">
+	                        Anda menyatakan laporan ini tidak valid, atau tidak terjadi pada perangkat yang dilaporkan.<br>
+	                        Apa anda yakin akan merubah status laporan ini menjadi invalid?
+	                    </div>
+	
+	                    <!-- Modal footer -->
+	                    <div class="modal-footer">
+	                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+	                        <a th:href="@{/kerentanan/my/update/invalid/} + ${laporan.id}">
+	                        	<button type="button" class="btn btn-primary">&nbsp;&nbsp;Ya&nbsp;&nbsp;</button>
+	                        </a>
+	                    </div>
+	
+	                </div>
+	            </div>
+	        </div>
+	        <!-- END MODAL -->
 		</form>
         
         <!--  CONTENT TAMBAH STATUS: VENDOR & AUDITOR -->
-            <form th:if="${laporan.status!='SUBMITTED'}" action="/kerentanan/my/update/addstatus" method="POST">
+            <form th:if="${laporan.status=='PROCESSED'}" action="/kerentanan/my/update/addstatus" method="POST">
             <input type="hidden" name="id" id="id" th:value="${laporan.id}">
             <div class="row border" style="margin-top:20px">
 	            <div class="col-md-12">
@@ -185,12 +229,12 @@
             	<div class="col">
                     <div class="form-group">
                         <label for="overview">Status Pemeriksaan Kerentanan</label>
-                        <input type="text" class="form-control" name="status" id="status"
+                        <input type="text" class="form-control" name="statusVendor" id="statusVendor"
                             placeholder="Status pemeriksaan">
                     </div>
                     <div class="form-group">
                         <label for="description">Catatan Pemeriksaan Kerentanan</label>
-                        <textarea class="form-control summernote" id="catatan" name="catatan" rows="4"></textarea>
+                        <textarea class="form-control summernote" id="catatanVendor" name="catatanVendor" rows="4"></textarea>
                     </div>
                 </div>
             </div>
@@ -231,7 +275,7 @@
 	        <!-- END MODAL -->
 		</form>
         <!--  CONTENT TAMBAH WORKAROUND: VENDOR & AUDITOR -->
-            <form th:if="${laporan.status!='SUBMITTED'}" action="/kerentanan/my/update/addworkaround" method="POST">
+            <form th:if="${laporan.status=='PROCESSED'}" action="/kerentanan/my/update/addworkaround" method="POST">
             <input type="hidden" name="id" id="id" th:value="${laporan.id}">
             <div class="row border" style="margin-top:20px">
 	            <div class="col-md-12">
@@ -240,7 +284,7 @@
             	<div class="col">
                     <div class="form-group">
                         <label for="description">Workaround Kerentanan</label>
-                        <textarea class="form-control summernote" id="workaround" name="workarond" rows="4"></textarea>
+                        <textarea class="form-control summernote" id="solution" name="solution" rows="4"></textarea>
                     </div>
                 </div>
             </div>
@@ -281,7 +325,7 @@
 	        <!-- END MODAL -->
 		</form>
         <!--  CONTENT KELOLA: VENDOR & AUDITOR -->
-            <form action="/kerentanan/my/update/save" method="POST">
+            <form th:if="${laporan.status=='PROCESSED'}" action="/kerentanan/my/update/save" method="POST">
             <input type="hidden" name="id" id="id" th:value="${laporan.id}">
             <div class="row border" style="margin-top:20px">
 	            <div class="col-md-12">
@@ -305,12 +349,6 @@
                     <div class="form-group">
                         <label for="impact">Dampak Serangan</label>
                         <textarea class="form-control" id="impact" name="impact" rows="3" th:text="${laporan.impact}"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="vendor">Vendor</label>
-                        <select class="form-control" name="vendorStr" id="vendorStr" th:value="${laporan.vendor.id}">
-                            <option th:each="vendor : ${vendors}" th:value="${vendor.id}" th:text="${vendor.name}"></option>
-                        </select>
                     </div>
                     <div class="form-group">
                         <label for="reference">Referensi</label>
@@ -375,20 +413,28 @@
 		</form>
                
         <!--  CONTENT PATCH & ARSIP: VENDOR & AUDITOR -->
-            <form action="/kerentanan/my/update/tambahpatch" method="POST">
+            <form th:if="${laporan.status=='PROCESSED'}" action="/kerentanan/my/update/addpatch" method="POST">
             <input type="hidden" name="id" id="id" th:value="${laporan.id}">
             <div class="row border" style="margin-top:20px">
 	            <div class="col-md-12">
 	                <h4 style="margin-top: 10px;">Tambah Patch Kerentanan/Arsipkan Kerentanan</h4>
 	            </div>
+            	<div class="col">
+            		<div class="form-group">
+                        <label for="catatanPatch">Catatan Patch</label>
+                        <textarea class="form-control" id="catatanPatch" name="catatanPatch" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="urlPatch">URL Patch</label>
+                        <textarea class="form-control" id="urlPatch" name="urlPatch" rows="2"></textarea>
+                    </div>
+            	</div>
             </div>
             <div class="row border">
                 <div class="col-md-12">
                     <div class="d-flex flex-row-reverse" style="margin-top: 10px;">
                         <button type="button" class="btn btn-primary m-2 pull-right" id="tambahPatchBtn" data-toggle="modal"
                             data-target="#tambahPatchModal">&nbsp;&nbsp;Tambah Patch&nbsp;&nbsp;</button>
-                    </div>
-                    <div class="d-flex flex-row-reverse" style="margin-top: 10px;">
                         <button type="button" class="btn btn-danger m-2 pull-right" id="arsipkanBtn" data-toggle="modal"
                             data-target="#arsipkanModal">&nbsp;&nbsp;Arsipkan&nbsp;&nbsp;</button>
                     </div>
@@ -401,14 +447,14 @@
 	
 	                    <!-- Modal Header -->
 	                    <div class="modal-header">
-	                        <h4 class="modal-title">Tambah Workaround Kerentanan</h4>
+	                        <h4 class="modal-title">Tambah Patch Kerentanan</h4>
 	                        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	                    </div>
 	
 	                    <!-- Modal body -->
 	                    <div class="modal-body">
-	                        Apakah semua yang anda masukan benar dan dapat dipertanggung jawabkan baik secara praktik maupun
-	                        secara hukum?
+	                    	Anda menambahkan patch kerentanan pada kerentanan ini, maka kerentanan ini akan dinyatakan selesai atay patched.<br>
+	                    	Apa anda telah menyantumkan catatan dan url patch dengan sesuai?
 	                    </div>
 	
 	                    <!-- Modal footer -->
@@ -428,20 +474,23 @@
 	
 	                    <!-- Modal Header -->
 	                    <div class="modal-header">
-	                        <h4 class="modal-title">Tambah Workaround Kerentanan</h4>
+	                        <h4 class="modal-title">Arsipkan Kerentanan</h4>
 	                        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	                    </div>
 	
 	                    <!-- Modal body -->
 	                    <div class="modal-body">
-	                        Apakah semua yang anda masukan benar dan dapat dipertanggung jawabkan baik secara praktik maupun
-	                        secara hukum?
+	                    	Anda mengarsipkan kerentanan ini, maka kerentanan ini tidak akan ditampilkan lagi pada catatan IDVN umum.<br>
+	                    	Pengarsipan kerentanan dilakukan apabila kerentanan tidak dapat diumumkan pada ranah publik.<br>
+	                    	Anda yakin akan mengarsipkan kerentanan ini?
 	                    </div>
 	
 	                    <!-- Modal footer -->
 	                    <div class="modal-footer">
 	                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
-	                        <button type="submit" class="btn btn-primary">&nbsp;&nbsp;Ya&nbsp;&nbsp;</button>
+	                        <a th:href="@{/kerentanan/my/update/archive/} + ${laporan.id}">
+	                        	<button type="button" class="btn btn-primary">&nbsp;&nbsp;Ya&nbsp;&nbsp;</button>
+	                        </a>
 	                    </div>
 	
 	                </div>
@@ -456,6 +505,7 @@
     <script src="../static/js/cvss.js" th:src="@{/js/cvss.js}"></script>
     <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
     <script src="../static/js/summernote.min.js" th:src="@{/js/summernote.min.js}"></script>
+    <script src="../static/js/base.js" th:src="@{/js/base.js}"></script>
 
     <script>
 	    var c = new CVSSView("cvssboardShow", );
@@ -467,9 +517,10 @@
             }
         });
 	    d.set(document.getElementById("cvss-v3-vector-string").textContent);
-	    $(document).ready(function(){
+	    /* $(document).ready(function(){
 	    	$('.summernote').summernote();
-	    });
+	    }); */
+	    
     </script>
     <!-- /container -->
     <!-- Bootstrap core JavaScript
