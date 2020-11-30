@@ -56,6 +56,12 @@ public class WebController {
 		return "redirect:home";
 	}
 	
+	@RequestMapping("/about")
+	public String about(Model model) {
+//		userService.setAuditor("5fc465375b84ff5063ea00de", "5fc465505b84ff5063ea00df");
+		return "content/about";
+	}
+	
 	@RequestMapping("/login")
 	public String login(@RequestParam(required=false,defaultValue = "") String error, Model model) {
 		if (error.equals("exist")) {

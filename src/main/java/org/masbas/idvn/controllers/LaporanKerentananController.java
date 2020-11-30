@@ -66,7 +66,7 @@ public class LaporanKerentananController {
 	@RequestMapping("/kerentanan/terbaru")
 	public String indexTerbaru(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 		int currPage = page.orElse(1);
-		int currSize = size.orElse(5);
+		int currSize = size.orElse(10);
 		PageWrapper<Laporan> pager = new PageWrapper<Laporan>(laporanService.findAllLaporanPageable(PageRequest.of(currPage-1, currSize, Sort.by("createdTimeStamp").descending())), "/kerentanan/terbaru");
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("page", pager);
@@ -78,7 +78,7 @@ public class LaporanKerentananController {
 	@RequestMapping("/kerentanan/tracking")
 	public String indexTracking(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 		int currPage = page.orElse(1);
-		int currSize = size.orElse(5);
+		int currSize = size.orElse(10);
 		PageWrapper<Laporan> pager = new PageWrapper<Laporan>(laporanService.findAllLaporanTrackingPageable(PageRequest.of(currPage-1, currSize, Sort.by("createdTimeStamp").descending())), "/kerentanan/terbaru");
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("page", pager);
@@ -90,7 +90,7 @@ public class LaporanKerentananController {
 	@RequestMapping("/kerentanan/invalid")
 	public String indexInvalid(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 		int currPage = page.orElse(1);
-		int currSize = size.orElse(5);
+		int currSize = size.orElse(10);
 		PageWrapper<Laporan> pager = new PageWrapper<Laporan>(laporanService.findAllLaporanInvalidPageable(PageRequest.of(currPage-1, currSize, Sort.by("createdTimeStamp").descending())), "/kerentanan/terbaru");
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("page", pager);
@@ -151,7 +151,7 @@ public class LaporanKerentananController {
 	@RequestMapping("/kerentanan/my/tracking")
 	public String myIndexTracking(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 		int currPage = page.orElse(1);
-		int currSize = size.orElse(5);
+		int currSize = size.orElse(10);
 		User user = this.getCurrentUser();
 		if(UserHelper.TIPE_NOTIFIER.equalsIgnoreCase(user.getTipeUser())) {
 			PageWrapper<Laporan> pager = new PageWrapper<Laporan>(laporanService.findAllLaporanTrackingPageableCurrUser(user, PageRequest.of(currPage-1, currSize, Sort.by("createdTimeStamp").descending())), "/kerentanan/tracking");
@@ -175,7 +175,7 @@ public class LaporanKerentananController {
 	@RequestMapping("/kerentanan/my/invalid")
 	public String myIndexInvalid(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 		int currPage = page.orElse(1);
-		int currSize = size.orElse(5);
+		int currSize = size.orElse(10);
 		User user = this.getCurrentUser();
 		if(UserHelper.TIPE_NOTIFIER.equalsIgnoreCase(user.getTipeUser())) {
 			PageWrapper<Laporan> pager = new PageWrapper<Laporan>(laporanService.findAllLaporanInvalidPageableCurrUser(user, PageRequest.of(currPage-1, currSize, Sort.by("createdTimeStamp").descending())), "/kerentanan/invalid");

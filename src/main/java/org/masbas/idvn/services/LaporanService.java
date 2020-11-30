@@ -35,7 +35,7 @@ public class LaporanService implements ILaporanService {
 	}
 	
 	public Laporan findLatestLaporan() {
-		return laporanRepository.findLatestLaporan(Sort.by(Sort.Direction.DESC, "code")).get(0);
+		return laporanRepository.findLatestLaporan(Sort.by(Sort.Direction.DESC, "createdTimeStamp")).get(0);
 	}
 	
 	public Laporan findByCode(String code) {

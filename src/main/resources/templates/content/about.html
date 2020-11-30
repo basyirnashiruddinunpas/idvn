@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/headerFragment :: header" th:remove="tag"></div>
+    <link href="../static/css/base.css" rel="stylesheet" th:href="@{/css/base.css}" />
+</head>
+<body>    
+	<div th:replace="/fragments/navFragment :: nav" th:remove="tag"></div>
+        <div class="container mt-lg-2">
+            <div class="row w-100">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">IDVN</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row border">
+                <div class="col-md-12">
+                    <h4 style="margin-top: 10px; margin-bottom: 30px;">Tentang IDVN</h4>
+                </div>
+                <div class="col">
+	                <div class="media text-muted pt-3">
+	                    <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+	                        Indonesian Vulnerability Notes (IDVN) Merupakan sebuah aplikasi yang menaungi seluruh laporan dari 
+	                        kerentanan yang terjadi di Indonesia. IDVN memberikan pencatatan kerentanan yang
+	                        terjadi di Indonesia mulai dari Infrastruktur IT, perangkat lunak, perangkat keras, jaringan, dll yang
+	                        berkaitan dengan IT.
+	                        
+	                    </p>
+	                </div>
+	                <div class="media text-muted pt-3">
+	                    <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+	                        <strong class="d-block text-gray-dark">Notifier</strong>
+	                        Notifier merupakan pihak yang mendaftarkan diri kedalam sistem IDVN untuk memberikan laporan akan kerentanan
+	                        yang ditemukan. Notifier bisa siapapun yang bersedia untuk melaporkan kerentanan kedalam sistem pencatatan
+	                        kerentanan IDVN.<br><br>
+	                        Seorang notifier dapat melakukan:
+	                        <ol>
+	                        	<li>Melaporkan kerentanan kepada IDVN terhadap vendor yang terdaftar didalam sistem IDVN.</li>
+	                        	<li>Melihat status penanganan kerentanan yang dilaporkan.</li>
+	                        	<li>Melihat semuau kerentanan yang dilaporkan</li>
+	                        </ol>
+	                        
+	                    </div>
+	                </div>
+	                <div class="media text-muted pt-3">
+	                    <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+	                        <strong class="d-block text-gray-dark">Vendor</strong>
+	                        Vendor merupakan pihak yang memiliki
+	                    </div>
+	                </div>
+	                <div class="media text-muted pt-3">
+	                    <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
+	                        <strong class="d-block text-gray-dark">Auditor</strong>
+	                        
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+
+    <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
+    <script src="../static/js/cvss.js" th:src="@{/js/cvss.js}"></script>
+
+</body>
+
+</html>

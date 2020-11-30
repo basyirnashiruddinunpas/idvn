@@ -53,6 +53,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/base*").permitAll()
         .antMatchers("/base/*").permitAll()
         .antMatchers("/home").permitAll()
+        .antMatchers("/about").permitAll()
         .antMatchers("/kerentanan*").permitAll()
         .antMatchers("/kerentanan/show/*").permitAll()
         .antMatchers("/kerentanan/terbaru*").permitAll()
