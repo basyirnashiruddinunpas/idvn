@@ -5,7 +5,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico" />
+    <meta property="og:image" content="../static/img/idvn6.png" th:content="@{/img/idvn6.png}" />
+    <meta property="og:title" th:content="${title} ? ${title} : 'IDVN | Indonesian Vulnerability Notes' " />
+    <meta property="og:description" content="IDVN | Indonesian Vulnerability Notes" />
+    <link rel="icon" href="../static/img/idvn6.ico" th:href="@{/img/idvn6.ico}" />
 
     <title>IDVN - Indonesian Vulnerability Notes</title>
 

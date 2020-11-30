@@ -200,7 +200,6 @@ public class LaporanKerentananController {
 	public String lapor(Model model) {
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("mode", appMode);
-		model.addAttribute("pageTitle", "IDVN - Indonesia Vulnerability Notes");
 		model.addAttribute("vendors", userService.findAllVendor());
 		return "content/pelaporan/lapor";
 	}
@@ -354,12 +353,13 @@ public class LaporanKerentananController {
 			dateEdit = dateFormat.format(laporan.getUpdatedTimeStamp());
 		}
 				
-		
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("laporan", laporan);
 		model.addAttribute("judul", laporan.getOverview() + " [" + date + "]");
 		model.addAttribute("date", date);
 		model.addAttribute("dateEdit", dateEdit);
+		String title = laporan.getCode() + " - " + laporan.getOverview() + " | Indonesian Vulnerability Notes" ;
+		model.addAttribute("title", title);
 		return "content/pelaporan/show";
 	}
 	
@@ -382,6 +382,8 @@ public class LaporanKerentananController {
 		model.addAttribute("date", date);
 		model.addAttribute("dateEdit", dateEdit);
 		model.addAttribute("vendors", userService.findAllVendor());
+		String title = laporan.getCode() + " - " + laporan.getOverview() + " | Indonesian Vulnerability Notes" ;
+		model.addAttribute("title", title);
 		return "content/pelaporan/kelola";
 	}
 	
