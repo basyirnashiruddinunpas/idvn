@@ -9,21 +9,15 @@
     <div id="logreg-forms">
         <form action="/dologin" method="POST" class="form-signin">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-            <div class="social-login">
-                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
-            </div>
-            <p style="text-align:center"> OR  </p>
             <input type="email" id="username" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
             
-            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
-            <a href="#" id="forgot_pswd">Forgot password?</a>
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Masuk</button>
             
 			<div th:if="${errorLogin != ''}" class="alert alert-danger" role="alert" th:text="${errorLogin}"></div>
             <hr>
             <!-- <p>Don't have an account!</p>  -->
-            <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
+            <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Daftar Akun Baru</button>
             </form>
 
             <form action="/reset/password/" class="form-reset">
@@ -33,14 +27,8 @@
             </form>
             
             <form action="/register/notifier" method="POST" class="form-signup">
-                <div class="social-login">
-                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
-                </div>
-                <div class="social-login">
-                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
-                </div>
-                
-                <p style="text-align:center">OR</p>
+            
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Daftar Akun</h1>
 
                 <input type="text" id="name" name="name" class="form-control" placeholder="Nama" requiredc autofocus="">
                 <input type="email" id="email" name="email" class="form-control" placeholder="Alamat Email" required autofocus="">
@@ -49,7 +37,7 @@
                 <input type="text" id="contact" name="contact" class="form-control" placeholder="Nomor Kontak" required autofocus="">
 				
 				<div th:if="${errorMsg != ''}" class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>
-                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Daftar</button>
                 <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
             </form>
             <br>

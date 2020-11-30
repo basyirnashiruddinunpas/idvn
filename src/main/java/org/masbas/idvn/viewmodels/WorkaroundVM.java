@@ -2,18 +2,23 @@ package org.masbas.idvn.viewmodels;
 
 import java.util.Date;
 
-public class PatchDto {
-
+public class WorkaroundVM {
 	private String id;
-	private String catatanPatch;
-	private String urlPatch;
+	private String solution;
 	private Date createdTimestamp;
 	private Date updatedTimestamp;
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getSolution() {
+		return solution;
+	}
+	public void setSolution(String solution) {
+		this.solution = solution;
 	}
 	public Date getCreatedTimestamp() {
 		return createdTimestamp;
@@ -27,19 +32,4 @@ public class PatchDto {
 	public void setUpdatedTimestamp(Date updatedTimestamp) {
 		this.updatedTimestamp = updatedTimestamp;
 	}
-	public String getCatatanPatch() {
-		return catatanPatch;
-	}
-	public void setCatatanPatch(String catatanPatch) {
-		this.catatanPatch = catatanPatch;
-	}
-	public String getUrlPatch() {
-		return urlPatch;
-	}
-	public void setUrlPatch(String urlPatch) {
-		this.urlPatch = urlPatch;
-	}
-	
-	
-
 }

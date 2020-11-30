@@ -1,6 +1,6 @@
 package org.masbas.idvn.viewmodels;
 
-public class LoginDto {
+public class LoginVM {
 	private String email;
 	private String password;
 	public String getEmail() {

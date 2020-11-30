@@ -1,5 +1,5 @@
 package org.masbas.idvn.viewmodels;
 
-public class NotifierDto {
+public class NotifierVM {
 
 }

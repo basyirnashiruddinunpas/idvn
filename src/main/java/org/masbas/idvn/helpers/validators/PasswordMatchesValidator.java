@@ -3,7 +3,7 @@ package org.masbas.idvn.helpers.validators;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.masbas.idvn.viewmodels.RegistrationDto;
+import org.masbas.idvn.viewmodels.RegistrationVM;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> { 
   
@@ -12,7 +12,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
   }
   @Override
   public boolean isValid(Object obj, ConstraintValidatorContext context){   
-      RegistrationDto registration = (RegistrationDto) obj;
+      RegistrationVM registration = (RegistrationVM) obj;
       return registration.getPassword().equals(registration.getMatchingPassword());    
   }     
 }

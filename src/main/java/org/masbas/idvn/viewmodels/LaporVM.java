@@ -8,7 +8,7 @@ import org.masbas.idvn.models.User;
 import org.masbas.idvn.models.Workaround;
 import org.springframework.data.annotation.Id;
 
-public class LaporanDto {
+public class LaporVM {
 	@Id
 	private String id;
 	

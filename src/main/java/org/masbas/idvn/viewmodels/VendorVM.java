@@ -1,5 +1,5 @@
 package org.masbas.idvn.viewmodels;
 
-public class AuditorDto {
+public class VendorVM {
 
 }

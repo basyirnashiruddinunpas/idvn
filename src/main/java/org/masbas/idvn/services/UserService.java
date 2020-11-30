@@ -12,7 +12,7 @@ import org.masbas.idvn.helpers.exceptions.UserAlreadyExistException;
 import org.masbas.idvn.models.Laporan;
 import org.masbas.idvn.models.User;
 import org.masbas.idvn.repositories.UserRepository;
-import org.masbas.idvn.viewmodels.RegistrationDto;
+import org.masbas.idvn.viewmodels.RegistrationVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class UserService implements IUserService {
 	private PasswordEncoder passwordEncoder;
 
 	@Transactional
-	public User registerNewUserAccount(RegistrationDto registrationDto) throws UserAlreadyExistException {
+	public User registerNewUserAccount(RegistrationVM registrationDto) throws UserAlreadyExistException {
 		if(emailExist(registrationDto.getEmail())) {
 			throw new UserAlreadyExistException("Email sudah digunakan, " + registrationDto.getEmail());
 		}

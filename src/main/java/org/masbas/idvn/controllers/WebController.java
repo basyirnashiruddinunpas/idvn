@@ -11,8 +11,8 @@ import org.masbas.idvn.models.User;
 import org.masbas.idvn.repositories.UserRepository;
 import org.masbas.idvn.services.LaporanService;
 import org.masbas.idvn.services.UserService;
-import org.masbas.idvn.viewmodels.LoginDto;
-import org.masbas.idvn.viewmodels.RegistrationDto;
+import org.masbas.idvn.viewmodels.LoginVM;
+import org.masbas.idvn.viewmodels.RegistrationVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
@@ -105,7 +105,7 @@ public class WebController {
 //		return new ModelAndView("content/user/profile", "user", registrationDto);
 //	}
 	@PostMapping("/register/notifier")
-	public String registerUserAccount(@ModelAttribute @Valid RegistrationDto registrationDto, HttpServletRequest request, 
+	public String registerUserAccount(@ModelAttribute @Valid RegistrationVM registrationDto, HttpServletRequest request, 
 			Errors errors) {
 		if(!registrationDto.getPassword().equals(registrationDto.getMatchingPassword())) {
 			return("redirect:/login?error=nomatch");

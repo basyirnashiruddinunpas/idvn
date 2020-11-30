@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.masbas.idvn.models.User;
 
-public class RegistrationDto {
+public class RegistrationVM {
 	
 	private String name;
 	

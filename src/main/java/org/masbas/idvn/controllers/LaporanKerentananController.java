@@ -18,10 +18,10 @@ import org.masbas.idvn.models.User;
 import org.masbas.idvn.models.Workaround;
 import org.masbas.idvn.services.LaporanService;
 import org.masbas.idvn.services.UserService;
-import org.masbas.idvn.viewmodels.LaporanDto;
-import org.masbas.idvn.viewmodels.PatchDto;
-import org.masbas.idvn.viewmodels.StatusVendorDto;
-import org.masbas.idvn.viewmodels.WorkaroundDto;
+import org.masbas.idvn.viewmodels.LaporVM;
+import org.masbas.idvn.viewmodels.PatchVM;
+import org.masbas.idvn.viewmodels.StatusVendorVM;
+import org.masbas.idvn.viewmodels.WorkaroundVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageRequest;
@@ -206,7 +206,7 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/save")
-	public String save(@ModelAttribute LaporanDto laporanDto) {
+	public String save(@ModelAttribute LaporVM laporanDto) {
 		User vendor = userService.getUserById(laporanDto.getVendorStr());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMdd");
 		String date = dateFormat.format(new Date());
@@ -239,7 +239,7 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/verify")
-	public String setVerify(@ModelAttribute StatusVendorDto statusVendor) {
+	public String setVerify(@ModelAttribute StatusVendorVM statusVendor) {
 		Laporan laporan = laporanService.findById(statusVendor.getId()).get();
 		StatusVendor status = new StatusVendor();
 		List<StatusVendor> lsStatus = new ArrayList<StatusVendor>();
@@ -265,7 +265,7 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/addstatus")
-	public String addStatus(@ModelAttribute StatusVendorDto statusVendor) {
+	public String addStatus(@ModelAttribute StatusVendorVM statusVendor) {
 		Laporan laporan = laporanService.findById(statusVendor.getId()).get();
 		StatusVendor status = new StatusVendor();
 		List<StatusVendor> lsStatus = laporan.getStatusVendor();
@@ -282,7 +282,7 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/addworkaround")
-	public String addWorkaround(@ModelAttribute WorkaroundDto workaroundDto) {
+	public String addWorkaround(@ModelAttribute WorkaroundVM workaroundDto) {
 		Laporan laporan = laporanService.findById(workaroundDto.getId()).get();
 		Workaround workaround = new Workaround();
 		List<Workaround> lsWorkaround = laporan.getWorkarounds();
@@ -301,7 +301,7 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/addpatch")
-	public String addPatch(@ModelAttribute PatchDto patchDto) {
+	public String addPatch(@ModelAttribute PatchVM patchDto) {
 		Laporan laporan = laporanService.findById(patchDto.getId()).get();
 		Patch patch = new Patch();
 		
@@ -326,7 +326,7 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/save")
-	public String update(@ModelAttribute LaporanDto laporanDto) {
+	public String update(@ModelAttribute LaporVM laporanDto) {
 		Laporan laporan = laporanService.findById(laporanDto.getId()).get();
 		laporan.setOverview(laporanDto.getOverview());
 		laporan.setProductAffected(laporanDto.getProductAffected());

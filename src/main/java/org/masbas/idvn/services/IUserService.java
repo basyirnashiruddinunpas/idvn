@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.masbas.idvn.helpers.exceptions.UserAlreadyExistException;
 import org.masbas.idvn.models.User;
-import org.masbas.idvn.viewmodels.RegistrationDto;
+import org.masbas.idvn.viewmodels.RegistrationVM;
 
 public interface IUserService {
 	
-	User registerNewUserAccount(RegistrationDto userDto)
+	User registerNewUserAccount(RegistrationVM userDto)
 		throws UserAlreadyExistException;
 	
 	public User loginUser(String email, String password);

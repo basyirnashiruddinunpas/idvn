@@ -2,7 +2,7 @@ package org.masbas.idvn.viewmodels;
 
 import java.util.Date;
 
-public class StatusVendorDto {
+public class StatusVendorVM {
 	private String id;
 	private String statusVendor;
 	private String catatanVendor;
