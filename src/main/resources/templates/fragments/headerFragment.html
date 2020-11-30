@@ -10,7 +10,7 @@
     <meta property="og:description" content="IDVN | Indonesian Vulnerability Notes" />
     <link rel="icon" href="../static/img/idvn6.ico" th:href="@{/img/idvn6.ico}" />
 
-    <title>IDVN - Indonesian Vulnerability Notes</title>
+    <title th:text="${title} ? ${title} : 'IDVN | Indonesian Vulnerability Notes' ">IDVN - Indonesian Vulnerability Notes</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" />
