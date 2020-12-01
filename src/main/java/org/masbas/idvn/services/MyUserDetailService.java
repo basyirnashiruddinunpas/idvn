@@ -19,24 +19,17 @@ public class MyUserDetailService implements UserDetailsService {
     // 
     public UserDetails loadUserByUsername(String email)
       throws UsernameNotFoundException {
-    	System.out.println("EMAIL: " + email);
-    	System.out.println("BEGIN");
         User user = userRepository.findByEmail(email);
-        for (User ele : userRepository.findAll()) {
-			System.out.println(ele.getEmail());
-		}
+        
         if (user == null) {
-        	System.out.println("BEGIN2");
             throw new UsernameNotFoundException(
               "No user found with username: "+ email);
         }
-    	System.out.println("BEGIN3");
+
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        
-        System.out.println("LOGIN SUCCESS HERE");
         
         CurrentUser currUser = new CurrentUser
                 (user.getEmail(), 

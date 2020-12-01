@@ -36,7 +36,7 @@
                 <input type="password" id="matchingPassword" name="matchingPassword" class="form-control" placeholder="Ulangi Password" required autofocus="">
                 <input type="text" id="contact" name="contact" class="form-control" placeholder="Nomor Kontak" required autofocus="">
 				
-				<div th:if="${errorMsg != ''}" class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>
+				<div th:if="${error != null}" class="alert alert-danger" role="alert" th:text="${error}"></div>
                 <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Daftar</button>
                 <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
             </form>
@@ -48,7 +48,7 @@
     <div th:replace="/fragments/footerFragment :: footer" th:remove="tag"></div>
     <script src="../static/js/font-awesome-all.js" th:src="@{/js/font-awesome-all.js}"></script>
     <script src="../static/js/login.js" th:src="@{/js/login.js}"></script>
-    <script th:if="${errorMsg != ''}" th:inline="javascript">
+    <script th:if="${error != null}" th:inline="javascript">
     		setTimeout(
     		  function() 
     		  {

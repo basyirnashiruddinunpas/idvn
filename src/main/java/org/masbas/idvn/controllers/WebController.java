@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class WebController {
@@ -64,13 +65,7 @@ public class WebController {
 	
 	@RequestMapping("/login")
 	public String login(@RequestParam(required=false,defaultValue = "") String error, Model model) {
-		if (error.equals("exist")) {
-			model.addAttribute("errorMsg", "Pengguna sudah pernah terdaftar");
-			model.addAttribute("errorLogin", "");
-		} else if (error.equals("nomatch")) {
-			model.addAttribute("errorMsg", "Password tidak cocok");
-			model.addAttribute("errorLogin", "");
-		} else if (error.equals("login")) {
+		if (error.equals("login")) {
 			model.addAttribute("errorLogin", "Username / Password Salah");
 			model.addAttribute("errorMsg", "");
 		} else {
@@ -112,16 +107,18 @@ public class WebController {
 //	}
 	@PostMapping("/register/notifier")
 	public String registerUserAccount(@ModelAttribute @Valid RegistrationVM registrationDto, HttpServletRequest request, 
-			Errors errors) {
+			Errors errors, RedirectAttributes redir) {
 		if(!registrationDto.getPassword().equals(registrationDto.getMatchingPassword())) {
-			return("redirect:/login?error=nomatch");
+			redir.addFlashAttribute("error", "Password Tidak Cocok");
+			return("redirect:/login");
 		}
 		
 		try {
 			registrationDto.setTipeUser(UserHelper.TIPE_NOTIFIER);
 			User registered = userService.registerNewUserAccount(registrationDto);
 		} catch(UserAlreadyExistException uaex) {
-			return("redirect:/login?error=exist");
+			redir.addFlashAttribute("error", "Pengguna Sudah Terdaftar");
+			return("redirect:/login");
 		}
 		
 		return("redirect:/home");

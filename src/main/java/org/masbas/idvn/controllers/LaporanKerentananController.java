@@ -11,6 +11,7 @@ import org.masbas.idvn.helpers.CurrentUserHelper;
 import org.masbas.idvn.helpers.PageWrapper;
 import org.masbas.idvn.helpers.StatusHelper;
 import org.masbas.idvn.helpers.UserHelper;
+import org.masbas.idvn.helpers.validators.ModelValidator;
 import org.masbas.idvn.models.Laporan;
 import org.masbas.idvn.models.Patch;
 import org.masbas.idvn.models.StatusVendor;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LaporanKerentananController {
@@ -197,7 +199,7 @@ public class LaporanKerentananController {
 	}
 
 	@RequestMapping("/kerentanan/lapor")
-	public String lapor(Model model) {
+	public String lapor(@ModelAttribute LaporVM laporanDto, Model model) {
 		model.addAttribute("totalKerentanan", getTotalLaporan());
 		model.addAttribute("mode", appMode);
 		model.addAttribute("vendors", userService.findAllVendor());
@@ -205,7 +207,16 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/save")
-	public String save(@ModelAttribute LaporVM laporanDto) {
+	public String save(@ModelAttribute LaporVM laporanDto, RedirectAttributes redir) {
+		
+		ModelValidator<LaporVM> validator = new ModelValidator<LaporVM>(laporanDto);
+		String checkValid = validator.validate();
+		if(checkValid != null) {
+			redir.addFlashAttribute("flashmsg",checkValid);
+			redir.addFlashAttribute("flashcode",400);
+			return "redirect:/kerentanan/lapor";
+		}
+		
 		User vendor = userService.getUserById(laporanDto.getVendorStr());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMdd");
 		String date = dateFormat.format(new Date());
@@ -229,7 +240,8 @@ public class LaporanKerentananController {
 		if(email!="") {
 			laporan.setCreatedBy(userService.getUserByEmail(email));
 		}
-			
+		redir.addFlashAttribute("flashmsg","Kerentanan telah berhasil dilaporkan.");
+		redir.addFlashAttribute("flashcode",200);
 		laporan.setCreatedTimeStamp(new Date());
 		laporan.setUpdatedTimeStamp(new Date());
 		laporanService.save(laporan);
@@ -238,8 +250,18 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/verify")
-	public String setVerify(@ModelAttribute StatusVendorVM statusVendor) {
+	public String setVerify(@ModelAttribute StatusVendorVM statusVendor, RedirectAttributes redir) {
 		Laporan laporan = laporanService.findById(statusVendor.getId()).get();
+		
+
+		ModelValidator<StatusVendorVM> validator = new ModelValidator<StatusVendorVM>(statusVendor);
+		String checkValid = validator.validate();
+		if(checkValid != null) {
+			redir.addFlashAttribute("flashmsg",checkValid);
+			redir.addFlashAttribute("flashcode",400);
+			return "redirect:/kerentanan/my/show/" + laporan.getCode();
+		}
+		
 		StatusVendor status = new StatusVendor();
 		List<StatusVendor> lsStatus = new ArrayList<StatusVendor>();
 		status.setCatatanVendor(statusVendor.getCatatanVendor());
@@ -249,6 +271,8 @@ public class LaporanKerentananController {
 		lsStatus.add(status);
 		laporan.setStatusVendor(lsStatus);
 		laporan.setStatus(StatusHelper.STATUS_PROCESSED);
+		redir.addFlashAttribute("flashmsg","Verifikasi kerentanan telah berhasil.");
+		redir.addFlashAttribute("flashcode",200);
 		laporanService.save(laporan);
 		
 		
@@ -256,16 +280,25 @@ public class LaporanKerentananController {
 	}
 	
 	@RequestMapping("/kerentanan/my/update/invalid/{code}")
-	public String setInvalid(@PathVariable String code) {
+	public String setInvalid(@PathVariable String code, RedirectAttributes redir) {
 		Laporan laporan = laporanService.findById(code).get();
 		laporan.setStatus(StatusHelper.STATUS_NOT_VALID);
+		redir.addFlashAttribute("flashmsg","Status kerentanan telah berhasil dirubah menjadi invalid.");
+		redir.addFlashAttribute("flashcode",200);
 		laporanService.save(laporan);
 		return "redirect:/kerentanan/my/show/" + laporan.getCode();
 	}
 	
 	@PostMapping("/kerentanan/my/update/addstatus")
-	public String addStatus(@ModelAttribute StatusVendorVM statusVendor) {
+	public String addStatus(@ModelAttribute StatusVendorVM statusVendor, RedirectAttributes redir) {
 		Laporan laporan = laporanService.findById(statusVendor.getId()).get();
+		ModelValidator<StatusVendorVM> validator = new ModelValidator<StatusVendorVM>(statusVendor);
+		String checkValid = validator.validate();
+		if(checkValid != null) {
+			redir.addFlashAttribute("flashmsg",checkValid);
+			redir.addFlashAttribute("flashcode",400);
+			return "redirect:/kerentanan/my/show/" + laporan.getCode();
+		}
 		StatusVendor status = new StatusVendor();
 		List<StatusVendor> lsStatus = laporan.getStatusVendor();
 		status.setCatatanVendor(statusVendor.getCatatanVendor());
@@ -274,6 +307,8 @@ public class LaporanKerentananController {
 		status.setUpdatedTimestamp(new Date());
 		lsStatus.add(status);
 		laporan.setStatusVendor(lsStatus);
+		redir.addFlashAttribute("flashmsg","Status pengecekan kerentanan telah berhasil ditambahkan.");
+		redir.addFlashAttribute("flashcode",200);
 		laporanService.save(laporan);
 		
 		
@@ -281,8 +316,15 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/addworkaround")
-	public String addWorkaround(@ModelAttribute WorkaroundVM workaroundDto) {
+	public String addWorkaround(@ModelAttribute WorkaroundVM workaroundDto, RedirectAttributes redir) {
 		Laporan laporan = laporanService.findById(workaroundDto.getId()).get();
+		ModelValidator<WorkaroundVM> validator = new ModelValidator<WorkaroundVM>(workaroundDto);
+		String checkValid = validator.validate();
+		if(checkValid != null) {
+			redir.addFlashAttribute("flashmsg",checkValid);
+			redir.addFlashAttribute("flashcode",400);
+			return "redirect:/kerentanan/my/show/" + laporan.getCode();
+		}
 		Workaround workaround = new Workaround();
 		List<Workaround> lsWorkaround = laporan.getWorkarounds();
 		if(lsWorkaround==null)
@@ -293,6 +335,8 @@ public class LaporanKerentananController {
 		workaround.setUpdatedTimestamp(new Date());
 		lsWorkaround.add(workaround);
 		laporan.setWorkarounds(lsWorkaround);
+		redir.addFlashAttribute("flashmsg","Workaround telah berhasil ditambahkan.");
+		redir.addFlashAttribute("flashcode",200);
 		laporanService.save(laporan);
 		
 		
@@ -300,8 +344,15 @@ public class LaporanKerentananController {
 	}
 	
 	@PostMapping("/kerentanan/my/update/addpatch")
-	public String addPatch(@ModelAttribute PatchVM patchDto) {
+	public String addPatch(@ModelAttribute PatchVM patchDto, RedirectAttributes redir) {
 		Laporan laporan = laporanService.findById(patchDto.getId()).get();
+		ModelValidator<PatchVM> validator = new ModelValidator<PatchVM>(patchDto);
+		String checkValid = validator.validate();
+		if(checkValid != null) {
+			redir.addFlashAttribute("flashmsg",checkValid);
+			redir.addFlashAttribute("flashcode",400);
+			return "redirect:/kerentanan/my/show/" + laporan.getCode();
+		}
 		Patch patch = new Patch();
 		
 		patch.setCatatanPatch(patchDto.getCatatanPatch());
@@ -310,6 +361,8 @@ public class LaporanKerentananController {
 		patch.setUpdatedTimestamp(new Date());
 		laporan.setStatus(StatusHelper.STATUS_PATCHED);
 		laporan.setPatch(patch);
+		redir.addFlashAttribute("flashmsg","Patch telah berhasil ditambahkan.");
+		redir.addFlashAttribute("flashcode",200);
 		laporanService.save(laporan);
 		
 		
@@ -317,16 +370,28 @@ public class LaporanKerentananController {
 	}
 	
 	@RequestMapping("/kerentanan/my/update/archive/{code}")
-	public String setArchived(@PathVariable String code) {
+	public String setArchived(@PathVariable String code, RedirectAttributes redir) {
 		Laporan laporan = laporanService.findById(code).get();
 		laporan.setStatus(StatusHelper.STATUS_ARCHIVED);
+		redir.addFlashAttribute("flashmsg","Kerentanan telah berhasil diarsipkan.");
+		redir.addFlashAttribute("flashcode",200);
 		laporanService.save(laporan);
 		return "redirect:/kerentanan/my/show/" + laporan.getCode();
 	}
 	
 	@PostMapping("/kerentanan/my/update/save")
-	public String update(@ModelAttribute LaporVM laporanDto) {
+	public String update(@ModelAttribute LaporVM laporanDto, RedirectAttributes redir) {
+		
 		Laporan laporan = laporanService.findById(laporanDto.getId()).get();
+		
+		ModelValidator<LaporVM> validator = new ModelValidator<LaporVM>(laporanDto);
+		String checkValid = validator.validate();
+		if(checkValid != null) {
+			redir.addFlashAttribute("flashmsg",checkValid);
+			redir.addFlashAttribute("flashcode",400);
+			return "redirect:/kerentanan/my/show/" + laporan.getCode();
+		}
+		
 		laporan.setOverview(laporanDto.getOverview());
 		laporan.setProductAffected(laporanDto.getProductAffected());
 		laporan.setReferences(laporanDto.getReferences());
@@ -338,6 +403,8 @@ public class LaporanKerentananController {
 			laporan.setEditedBy(userService.getUserByEmail(email));
 		}
 		laporan.setUpdatedTimeStamp(new Date());
+		redir.addFlashAttribute("flashmsg","Kerentanan telah berhasil dirubah.");
+		redir.addFlashAttribute("flashcode",200);
 		laporanService.save(laporan);
 		
 		return "redirect:/kerentanan/my/show/" + laporan.getCode();

@@ -19,6 +19,7 @@
                     </ol>
                 </nav>
             </div>
+            <div th:if="${flashmsg}" th:utext="${flashmsg}" th:class="${flashcode==200} ? 'alert alert-success' : 'alert alert-danger' " role="alert"></div>
             <div class="row border">
                 <div class="col-md-12">
                     <h4 style="margin-top: 10px; margin-bottom: 30px;">Lapor Kerentanan</h4>
