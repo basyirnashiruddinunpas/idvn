@@ -27,21 +27,23 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="overview">Overview</label>
-                        <input type="text" class="form-control" name="overview" id="overview"
-                            placeholder="Ikhtisar kerentanan">
+                        <input type="text" class="form-control" name="overview" id="overview">
+                        <small id="otxt" class="form-text text-muted">Overview berupa gambaran umum dari kerentanan yang terjadi.</small>
                     </div>
                     <div class="form-group">
-                        <label for="product">Product Affected</label>
-                        <input type="text" class="form-control" name="productAffected" id="productAffected"
-                            placeholder="Produk Terkena Kerentanan">
+                        <label for="product">Produk Terjangkit</label>
+                        <input type="text" class="form-control" name="productAffected" id="productAffected">
+                            <small id="otxt" class="form-text text-muted">Produk terjangkit berupa produk-produk yang mengalami kerentanan.</small>
                     </div>
                     <div class="form-group">
                         <label for="description">Deskripsi</label>
                         <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                        <small id="otxt" class="form-text text-muted">Deskripsi mendetail dari kerentanan yang terjadi.</small>
                     </div>
                     <div class="form-group">
                         <label for="impact">Dampak Serangan</label>
                         <textarea class="form-control" id="impact" name="impact" rows="3"></textarea>
+                        <small id="otxt" class="form-text text-muted">Dampak yang terjadi terhadap produk terjangkit kerentanan.</small>
                     </div>
                     <div class="form-group">
                         <label for="vendor">Vendor</label>
@@ -49,10 +51,12 @@
                             <option value="" selected>-- Pilih --</option>
                             <option th:each="vendor : ${vendors}" th:value="${vendor.id}" th:text="${vendor.name}"></option>
                         </select>
+                        <small id="otxt" class="form-text text-muted">Vendor yang memiliki produk yang rentanan.</small>
                     </div>
                     <div class="form-group">
                         <label for="reference">Referensi</label>
                         <input type="text" class="form-control" name="references" id="references" placeholder="Referensi">
+                        <small id="otxt" class="form-text text-muted">Referensi berupa rujukan dari kerentanan, apabila sudah ada pencatatan terkait kerentanan (contoh: CVE dan CWE)</small>
                     </div>
                     <!-- Content Isi -->
 
@@ -71,6 +75,7 @@
                             <span class="cvss-version">CVSS v3</span>
                         </div>
                         <div id="cvssboard"> </div>
+                        <small id="otxt" class="form-text text-muted">Analisis CVSS berupa analisis dari kerentanan yang terjadi, mengikuti standar penilaian CVSS.</small>
                     </div>
                     <!-- End Content Isi -->
                 </div>
