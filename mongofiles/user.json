@@ -1,0 +1,285 @@
+[{
+  "_id": {
+    "$oid": "5fdc46b2a3cb863e9646050c"
+  },
+  "name": "indocyber",
+  "email": "indocyber@gmail.com",
+  "password": "$2a$10$a2u9pHkcNQdpx/oxom77tOBzqg7u4X7CTeZiGXd8FjHqJeccfYxei",
+  "contact": "088812311",
+  "tipeUser": "NOTIFIER",
+  "roles": [
+    "ROLE_NOTIFIER"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:05:38.690Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:05:38.690Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc46eaa3cb863e9646050d"
+  },
+  "name": "PT. Lintasarta",
+  "email": "lintasarta@gmail.com",
+  "password": "$2a$10$7MYS.zR1e8sxvZjdO2MHZOhF5IUXr3A1cymgaxA.F84SmMCjFGzoS",
+  "contact": "08177181213",
+  "tipeUser": "VENDOR",
+  "roles": [
+    "ROLE_VENDOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "auditor": [
+    {
+      "$ref": "user",
+      "$id": {
+        "$oid": "5fdc4b67a3cb863e96460516"
+      }
+    }
+  ],
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:06:34.865Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:06:34.865Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4700a3cb863e9646050e"
+  },
+  "name": "PT. Telekomunikasi Indonesia",
+  "email": "telkom@gmail.com",
+  "password": "$2a$10$MmceIYcqaeTbxXMDT4JSLehsw5r.tGgvXdrIWNwZm8.Cr3p2TzOPq",
+  "contact": "0811212123",
+  "tipeUser": "VENDOR",
+  "roles": [
+    "ROLE_VENDOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:06:56.597Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:06:56.597Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc47a3a3cb863e96460510"
+  },
+  "name": " Kementerian Komunikasi dan Informatika",
+  "email": "kominfo@gmail.com",
+  "password": "$2a$10$F5M1edCTdfabg.3.Rx7j9uPBVFWHLMMIYfzMD5x2ytpK4BoU00XMC",
+  "contact": "0881121331121",
+  "tipeUser": "VENDOR",
+  "roles": [
+    "ROLE_VENDOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "auditor": [
+    {
+      "$ref": "user",
+      "$id": {
+        "$oid": "5fdc4b45a3cb863e96460515"
+      }
+    }
+  ],
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:09:39.173Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:09:39.173Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4930a3cb863e96460511"
+  },
+  "name": "PT Indosat Tbk",
+  "email": "indosat@gmail.com",
+  "password": "$2a$10$7DSxWCi6Rbj758KaWB37P.n8zX.V0qQ2Bgpzxxh9OpIkpcanHc1rG",
+  "contact": "0881271262",
+  "tipeUser": "VENDOR",
+  "roles": [
+    "ROLE_VENDOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:16:16.777Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:16:16.777Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4944a3cb863e96460512"
+  },
+  "name": "Citraweb Mikrotik Indonesia",
+  "email": "citraweb@gmail.com",
+  "password": "$2a$10$a6DdKsWnSFeff8jVxN7ZBeboTxiyzkykXgCsrLJ5GNJ1mLA4JPGvO",
+  "contact": "08882212",
+  "tipeUser": "VENDOR",
+  "roles": [
+    "ROLE_VENDOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "auditor": [
+    {
+      "$ref": "user",
+      "$id": {
+        "$oid": "5fdc4b67a3cb863e96460516"
+      }
+    }
+  ],
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:16:36.284Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:16:36.284Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4959a3cb863e96460513"
+  },
+  "name": "Toyota Indonesia",
+  "email": "toyotaid@gmail.com",
+  "password": "$2a$10$UP8/kWkptrRfdPzklZc4j.LugZgSnFsIsHMhVkXN2cYjMdbPaTAxO",
+  "contact": "08111771231",
+  "tipeUser": "VENDOR",
+  "roles": [
+    "ROLE_VENDOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:16:57.156Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:16:57.156Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4a89a3cb863e96460514"
+  },
+  "name": "Tidak Terdaftar",
+  "email": "idvnvendor@gmail.com",
+  "password": "$2a$10$qral3z5gY8wQ57iZGCbjJemtekPCuS/sA.zQ7RjGfAHLhfjBPP592",
+  "contact": "081123123123",
+  "tipeUser": "VENDOR",
+  "roles": [
+    "ROLE_VENDOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "auditor": [
+    {
+      "$ref": "user",
+      "$id": {
+        "$oid": "5fdc4b45a3cb863e96460515"
+      }
+    }
+  ],
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:22:01.338Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:22:01.338Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4b45a3cb863e96460515"
+  },
+  "name": "BSSN",
+  "email": "bssn@gmail.com",
+  "password": "$2a$10$dll54sAGtG89idVNligJheQFiVmY4WGiLMo6WYQLtWO2WMrm3B8nS",
+  "contact": "0868177712",
+  "tipeUser": "AUDITOR",
+  "roles": [
+    "ROLE_AUDITOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:25:09.415Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:25:09.415Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4b67a3cb863e96460516"
+  },
+  "name": "Netcampus",
+  "email": "netcampus@gmail.com",
+  "password": "$2a$10$mEWhbIS31oPHOmA8HsnYee/jGbyzbcd3YKzSZ/dQuersh.Pqb1.Xm",
+  "contact": "087716612",
+  "tipeUser": "AUDITOR",
+  "roles": [
+    "ROLE_AUDITOR"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:25:43.284Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:25:43.284Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4bb5a3cb863e96460517"
+  },
+  "name": "Cyberarmy",
+  "email": "cyberarmy@gmail.com",
+  "password": "$2a$10$bo5TUI4F26s/eY0ZvXheY.2IUupBMYbhPJ/mTgJ/8gZzZFcI2WxeW",
+  "contact": "081771232",
+  "tipeUser": "NOTIFIER",
+  "roles": [
+    "ROLE_NOTIFIER"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:27:01.068Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:27:01.068Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+},{
+  "_id": {
+    "$oid": "5fdc4befa3cb863e96460518"
+  },
+  "name": "XxX_Master88_XxX",
+  "email": "maser88@gmail.com",
+  "password": "$2a$10$9X/S6CYDduI2zvNrCybUueeeLCOdumalUK/b6iAFLpnBpswDDWykq",
+  "contact": "0811215223",
+  "tipeUser": "NOTIFIER",
+  "roles": [
+    "ROLE_NOTIFIER"
+  ],
+  "status": "ACTIVE",
+  "reputation": 0,
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:27:59.275Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:27:59.275Z"
+  },
+  "_class": "org.masbas.idvn.models.User"
+}]

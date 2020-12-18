@@ -31,31 +31,31 @@
                 <!-- Content Isi -->
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
-                        <strong class="d-block text-gray-dark">Overview</strong>
+                        <strong class="d-block text-gray-dark">Gambaran Kerentanan</strong>
                         <p th:text="${laporan.overview}" th:remove="tag"></p>
                     </p>
                 </div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
-                        <strong class="d-block text-gray-dark">Products Affected</strong>
+                        <strong class="d-block text-gray-dark">Produk Terjangkit</strong>
                         <p th:text="${laporan.productAffected}" th:remove="tag"></p>
                     </p>
                 </div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
-                        <strong class="d-block text-gray-dark">Impacts</strong>
+                        <strong class="d-block text-gray-dark">Dampak Kerentanan</strong>
                         <p th:text="${laporan.impact}" th:remove="tag"></p>
                     </p>
                 </div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
-                        <strong class="d-block text-gray-dark">Description</strong>
+                        <strong class="d-block text-gray-dark">Deskripsi</strong>
                         <p th:text="${laporan.description}" th:remove="tag"></p>
                     </p>
                 </div>
                 <div class="media text-muted pt-3">
                     <div class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
-                        <strong class="d-block text-gray-dark">Workaround</strong>
+                        <strong class="d-block text-gray-dark">Solusi Sementara</strong>
                         <ul>
                         	<li class="urlable" th:each="workaround : ${laporan.workarounds}" th:text="${workaround.solution}"></li>
                         </ul>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 text-dark">
-                        <strong class="d-block text-gray-dark">Vendor Status</strong>
+                        <strong class="d-block text-gray-dark">Status Vendor</strong>
 
                     </p>
                 </div>
@@ -105,13 +105,13 @@
                 </div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 border-bottom text-dark">
-                        <strong class="d-block text-gray-dark">References</strong>
+                        <strong class="d-block text-gray-dark">Referensi</strong>
                         <p th:text="${laporan.references}" th:remove="tag"></p>
                     </p>
                 </div>
                 <div class="media text-muted pt-3">
                     <p class="media-body pb-3 mb-0 lh-125 text-dark">
-                        <strong class="d-block text-gray-dark">Vulnerability Analysis - CVSS</strong>
+                        <strong class="d-block text-gray-dark">Analisis Kerentanan - CVSS</strong>
                 </div>
                 <div class="cvss-wrapper">
                     <div id="cvss-v3-line" class="cvss-line">
@@ -280,11 +280,11 @@
             <input type="hidden" name="id" id="id" th:value="${laporan.id}">
             <div class="row border" style="margin-top:20px">
 	            <div class="col-md-12">
-	                <h4 style="margin-top: 10px;">Tambah Workaround</h4>
+	                <h4 style="margin-top: 10px;">Tambah Solusi Sementara</h4>
 	            </div>
             	<div class="col">
                     <div class="form-group">
-                        <label for="description">Workaround Kerentanan</label>
+                        <label for="description">Solusi Sementara Kerentanan</label>
                         <textarea class="form-control summernote" id="solution" name="solution" rows="4"></textarea>
                     </div>
                 </div>
@@ -293,7 +293,7 @@
                 <div class="col-md-12">
                     <div class="d-flex flex-row-reverse" style="margin-top: 10px;">
                         <button type="button" class="btn btn-primary m-2 pull-right" id="workaroundBtn" data-toggle="modal"
-                            data-target="#workaroundModal">&nbsp;&nbsp;Tambah Workaround&nbsp;&nbsp;</button>
+                            data-target="#workaroundModal">&nbsp;&nbsp;Tambah Solusi Sementara&nbsp;&nbsp;</button>
                     </div>
                 </div>
             </div>
@@ -304,7 +304,7 @@
 	
 	                    <!-- Modal Header -->
 	                    <div class="modal-header">
-	                        <h4 class="modal-title">Tambah Workaround Kerentanan</h4>
+	                        <h4 class="modal-title">Tambah Solusi Sementara Kerentanan</h4>
 	                        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	                    </div>
 	
@@ -330,7 +330,7 @@
             <input type="hidden" name="id" id="id" th:value="${laporan.id}">
             <div class="row border" style="margin-top:20px">
 	            <div class="col-md-12">
-	                <h4 style="margin-top: 10px;">Update Kerentanan</h4>
+	                <h4 style="margin-top: 10px;">Perbarui Kerentanan</h4>
 	            </div>
             	<div class="col">
                     <div class="form-group">
@@ -339,7 +339,7 @@
                             placeholder="Ikhtisar kerentanan" th:value="${laporan.overview}">
                     </div>
                     <div class="form-group">
-                        <label for="product">Product Affected</label>
+                        <label for="product">Produk Terjangkit</label>
                         <input type="text" class="form-control" name="productAffected" id="productAffected"
                             placeholder="Produk Terkena Kerentanan" th:value="${laporan.productAffected}">
                     </div>
@@ -359,7 +359,7 @@
 
                     <div class="media text-muted pt-3">
                         <p class="media-body pb-3 mb-0 lh-125 text-dark">
-                            <strong class="d-block text-gray-dark">Vulnerability Analysis - CVSS</strong>
+                            <strong class="d-block text-gray-dark">Analisis Kerentanan - CVSS</strong>
                     </div>
                     <div class="form-group">
                         <label for="vectorString">Vector String</label>
@@ -380,7 +380,7 @@
                 <div class="col-md-12">
                     <div class="d-flex flex-row-reverse" style="margin-top: 10px;">
                         <button type="button" class="btn btn-primary m-2 pull-right" id="submitBtn" data-toggle="modal"
-                            data-target="#submitModal">&nbsp;&nbsp;UPDATE&nbsp;&nbsp;</button>
+                            data-target="#submitModal">&nbsp;&nbsp;PERBARUI&nbsp;&nbsp;</button>
                     </div>
                 </div>
             </div>

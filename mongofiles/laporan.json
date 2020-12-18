@@ -1,0 +1,324 @@
+[{
+  "_id": {
+    "$oid": "5fdc50939dd1bb5ad8f48e95"
+  },
+  "code": "IDVN-2020-1218-1",
+  "overview": "Hibernate ORM Rentan terhadap SQL Injection",
+  "productAffected": "Hibernate ORM versi 5.4.24 kebawah",
+  "description": "Hibernate ORM merupkan framework ORM untuk Java.\r\nHibernate ORM dapat dikonfigurasi (hibernate.use_sql_comments menjadi true, dimana defaultnya false) untuk menambahkan statement SQL untuk melakukan debugging.\r\nKetika hibernate.use_sql_comments dikonfigurasi menjadi true, input yang tidak baik dapat menyebabkan statement SQL yang berbahaya (CWE-89)",
+  "impact": "Ketika hibernate.use_sql_comments dikonfigurasi menjadi true, input yang tidak baik dapat menyebabkan statement SQL yang berbahaya (CWE-89)",
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4a89a3cb863e96460514"
+    }
+  },
+  "references": "CWE-89: https://cwe.mitre.org/data/definitions/89.html , JVN#90729322: https://jvn.jp/en/jp/JVN90729322/index.html",
+  "vectorString": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+  "status": "SUBMITTED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:47:47.132Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:47:47.132Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+},{
+  "_id": {
+    "$oid": "5fdc52009dd1bb5ad8f48e96"
+  },
+  "code": "IDVN-2020-1218-2",
+  "overview": "Apache Struts 2 rentan terhadap code execution vulnerability.",
+  "productAffected": "Apache Struts 2.0.0 hingga 2.5.25",
+  "description": "Apache Struts 2 disediakan oleh Apache Software Foundation mengandung kerentanan remote code execution dikarenakan input validasi yang salah (CWE-20).",
+  "impact": "Penyerang dapat mengeksekusi kode yang berbahaya secara remote.",
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4a89a3cb863e96460514"
+    }
+  },
+  "references": "CWE-20: https://cwe.mitre.org/data/definitions/20.html",
+  "vectorString": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+  "status": "SUBMITTED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:53:52.123Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:53:52.123Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+},{
+  "_id": {
+    "$oid": "5fdc52f09dd1bb5ad8f48e97"
+  },
+  "code": "IDVN-2020-1218-3",
+  "overview": "Plugin kamera pada Apache Cordova rentan terhadap kebocoran informasi.",
+  "productAffected": "Apache Cordova Plugin camera version awal hingga 5.0.0",
+  "description": "Apache Cordova Plugin camera is a plugin for Apache Cordova applications, which provides an API for taking pictures and for choosing images from the system image library.\r\nVulnerable versions of Apache Cordova Plugin camera, when used in Android applications, use the external storage on the device when available, as an image file cache. Any applications with permission READ_EXTERNAL_STORAGE (or WRITE_EXTERNAL_STORAGE also) can access these cache files(CWE-200).",
+  "impact": "When a user is tricked into installing some malicious application to the Android device which has an external storage, and the user take a photo with the vulnerable application, then the image (photo) file is cached on the external storage. The malicious application may retrieve the file contents from the external storage.",
+  "statusVendor": [
+    {
+      "statusVendor": "Valid",
+      "catatanVendor": "Kerentanan terjadi pada versi 5.0.0 kebawah.",
+      "createdTimestamp": {
+        "$date": "2020-12-18T06:58:28.403Z"
+      },
+      "updatedTimestamp": {
+        "$date": "2020-12-18T06:58:28.403Z"
+      }
+    },
+    {
+      "statusVendor": "Patch",
+      "catatanVendor": "Update plugin kamera pada apache cordova android, harus versi 5.0.0 keatas",
+      "createdTimestamp": {
+        "$date": "2020-12-18T06:59:14.469Z"
+      },
+      "updatedTimestamp": {
+        "$date": "2020-12-18T06:59:14.469Z"
+      }
+    }
+  ],
+  "patch": {
+    "catatanPatch": "Update plugin kamera pada apache cordova android, harus versi 5.0.0 keatas",
+    "urlPatch": "https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-camera/",
+    "createdTimestamp": {
+      "$date": "2020-12-18T06:59:57.524Z"
+    },
+    "updatedTimestamp": {
+      "$date": "2020-12-18T06:59:57.524Z"
+    }
+  },
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4a89a3cb863e96460514"
+    }
+  },
+  "references": "CWE-200: https://cwe.mitre.org/data/definitions/200.html",
+  "vectorString": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N",
+  "status": "PATCHED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T06:57:52.339Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T06:57:52.339Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+},{
+  "_id": {
+    "$oid": "5fdc55709dd1bb5ad8f48e98"
+  },
+  "code": "IDVN-2020-1218-4",
+  "overview": "Plugin WordPress \"Live Chat - Live support\" mengandung kerentanan cross-ste request forgery.",
+  "productAffected": "Plugin WordPress \"Live Chat - Live support\" versi 3.1.0 dan terdahulu",
+  "description": "Plugin WordPress \"Live Chat - Live support\" mengandung kerentanan cross-ste request forgery.",
+  "impact": "Jika user mengakses website yang berbahaya ketika sudah login kedalam aplikasi wordpress yang terjangkit, operasi berbahaya dapat berjalan tanpa seizin user.",
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4a89a3cb863e96460514"
+    }
+  },
+  "references": "CWE-352: https://cwe.mitre.org/data/definitions/352.html",
+  "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N",
+  "status": "SUBMITTED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T07:08:32.453Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T07:08:32.453Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+},{
+  "_id": {
+    "$oid": "5fdc56239dd1bb5ad8f48e99"
+  },
+  "code": "IDVN-2020-1218-5",
+  "overview": "Plugin WordPress \"Simple Download Monitor\" mengandung berbagai kerentanan.",
+  "productAffected": "Simple Download Monitor versi 3.8.8 kebawah.",
+  "description": "WordPress Plugin \"Simple Download Monitor\" sesuai yang dilaporkan oleh Tips and Tricks HQ mengandung berbagai kerentanan (CSRF & SQL Injection).",
+  "impact": "An arbitrary script may be executed on the logged in user's web browser - CVE-2020-5650. An arbitrary script may be executed on the logged in user's web browser - CVE-2020-5650",
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4a89a3cb863e96460514"
+    }
+  },
+  "references": "CWE-89: https://cwe.mitre.org/data/definitions/89.html , CWE-79: https://cwe.mitre.org/data/definitions/79.html",
+  "vectorString": "CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:L/A:N",
+  "status": "SUBMITTED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T07:11:31.155Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T07:11:31.155Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+},{
+  "_id": {
+    "$oid": "5fdc566a9dd1bb5ad8f48e9a"
+  },
+  "code": "IDVN-2020-1218-6",
+  "overview": "Plugin WordPress \"Social Sharing Plugin\" mengandung kerentanan cross-site request forgery.",
+  "productAffected": "Social Sharing Plugin versi awal hingga 1.2.10",
+  "description": "WordPress Plugin \"Social Sharing Plugin\" provided by Social Rocket contains a cross-site request forgery vulnerability (CWE-352).",
+  "impact": "If a user with an administrative privilege views a malicious page while logged in, unintended operations may be performed.",
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4a89a3cb863e96460514"
+    }
+  },
+  "references": "CWE-352: https://cwe.mitre.org/data/definitions/352.html",
+  "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N",
+  "status": "SUBMITTED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T07:12:42.360Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T07:12:42.360Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+},{
+  "_id": {
+    "$oid": "5fdc59709dd1bb5ad8f48e9b"
+  },
+  "code": "IDVN-2020-1218-7",
+  "overview": "TOYOTA MOTOR's Global TechStream (GTS) memiliki kerentanan buffer overflow.",
+  "productAffected": "Global TechStream (GTS) untuk TOYOTA dealers dan servis independen versi 15.10.032 dan sebelumnya.",
+  "description": "Global TechStream (GTS) merupakan kakas diagnosis yang digunakan oleh Toyota Motor untuk membantu pekerjaan teknisi toyota dan teknisi independen. Global TechStream (GTS) mengandung buffer overflow vulnerability (CWE-121)",
+  "impact": "Penyerang dapat melakukan eksekusi kode berbahaya dan melakukan DoS.",
+  "workarounds": [
+    {
+      "solution": "Gunakan jaringan lokal kabel saja, jangan menggunakan nirkabel.",
+      "createdTimestamp": {
+        "$date": "2020-12-18T07:26:57.537Z"
+      },
+      "updatedTimestamp": {
+        "$date": "2020-12-18T07:26:57.537Z"
+      }
+    }
+  ],
+  "statusVendor": [
+    {
+      "statusVendor": "Valid",
+      "catatanVendor": "Kerentanan terjadi.",
+      "createdTimestamp": {
+        "$date": "2020-12-18T07:26:23.479Z"
+      },
+      "updatedTimestamp": {
+        "$date": "2020-12-18T07:26:23.479Z"
+      }
+    },
+    {
+      "statusVendor": "Patched",
+      "catatanVendor": "https://tascal.mx.toyota.co.jp/tsc/E8/E86001R/tascal/scantool/toyota/GTS/index.html",
+      "createdTimestamp": {
+        "$date": "2020-12-18T07:27:22.093Z"
+      },
+      "updatedTimestamp": {
+        "$date": "2020-12-18T07:27:22.093Z"
+      }
+    }
+  ],
+  "patch": {
+    "catatanPatch": "Harap gunakan firmware terbaru.",
+    "urlPatch": "https://tascal.mx.toyota.co.jp/tsc/E8/E86001R/tascal/scantool/toyota/GTS/index.html",
+    "createdTimestamp": {
+      "$date": "2020-12-18T07:27:33.454Z"
+    },
+    "updatedTimestamp": {
+      "$date": "2020-12-18T07:27:33.454Z"
+    }
+  },
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4959a3cb863e96460513"
+    }
+  },
+  "references": "CWE-121: https://cwe.mitre.org/data/definitions/121.html",
+  "vectorString": "CVSS:3.0/AV:P/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+  "status": "PATCHED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T07:25:36.998Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T07:25:36.998Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+},{
+  "_id": {
+    "$oid": "5fdc5ace9dd1bb5ad8f48e9c"
+  },
+  "code": "IDVN-2020-1218-8",
+  "overview": "Kerentanan pada Toyota Display Current Unit (DCU)",
+  "productAffected": "DCU Model 2017 terjangkit, dengan daftar kendaraan: LC, LS, NX, RC, RC-F, CAMRY, SIENNA",
+  "description": "TOYOTA MOTOR's DCU (Display Control Unit) mengandung kerentanan yang dipicu oleh BlueBorne vulnerability.",
+  "impact": "Penyerang dapat melakukan DoS.",
+  "vendor": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4959a3cb863e96460513"
+    }
+  },
+  "references": "CWE-400: https://cwe.mitre.org/data/definitions/400.html",
+  "vectorString": "CVSS:3.0/AV:A/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:L",
+  "status": "SUBMITTED",
+  "createdBy": {
+    "$ref": "user",
+    "$id": {
+      "$oid": "5fdc4bb5a3cb863e96460517"
+    }
+  },
+  "createdTimeStamp": {
+    "$date": "2020-12-18T07:31:26.841Z"
+  },
+  "updatedTimeStamp": {
+    "$date": "2020-12-18T07:31:26.841Z"
+  },
+  "_class": "org.masbas.idvn.models.Laporan"
+}]

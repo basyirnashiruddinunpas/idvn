@@ -59,7 +59,10 @@ public class WebController {
 	
 	@RequestMapping("/about")
 	public String about(Model model) {
-//		userService.setAuditor("5fc465375b84ff5063ea00de", "5fc465505b84ff5063ea00df");
+//		userService.setAuditor("5fdc46eaa3cb863e9646050d", "5fdc4b67a3cb863e96460516");
+//		userService.setAuditor("5fdc47a3a3cb863e96460510", "5fdc4b45a3cb863e96460515");
+//		userService.setAuditor("5fdc4a89a3cb863e96460514", "5fdc4b45a3cb863e96460515");
+//		userService.setAuditor("5fdc4944a3cb863e96460512", "5fdc4b67a3cb863e96460516");
 		return "content/about";
 	}
 	
